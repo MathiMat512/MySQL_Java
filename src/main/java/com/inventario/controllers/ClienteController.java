@@ -21,4 +21,16 @@ public class ClienteController extends HttpServlet {
         request.setAttribute("clientes", listaClientes);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+    
+    protected void doPost() {
+        
+    }
+    
+    protected void doPut(){
+        
+    }
+    
+    protected void doDelete(){
+        
+    }
 }

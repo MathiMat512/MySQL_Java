@@ -8,7 +8,7 @@ public class MySQLConnection {
     public static final String database = "bd_prueba";
     public static final String hostname = "localhost";
     public static final String port = "3306";
-    public static final String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
+    public static final String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false&serverTimezone=UTC";
     public static final String username = "root";
     public static final String password = "mathias123";
 
