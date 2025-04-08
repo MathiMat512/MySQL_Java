@@ -1,6 +1,6 @@
-com\inventario\models\Cliente.class
 com\mycompany\inventariado\resources\JakartaEE11Resource.class
-com\inventario\controllers\ClienteController.class
+com\inventario\models\Producto.class
 com\inventario\dao\MySQLConnection.class
 com\mycompany\inventariado\JakartaRestConfiguration.class
-com\inventario\dao\ClienteDAO.class
+com\inventario\controllers\ProductoController.class
+com\inventario\dao\ProductoDAO.class

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List, com.inventario.models.Cliente" %>
+<%@ page import="java.util.List, com.inventario.models.Producto" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -168,32 +168,34 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Código</th>
+                                        <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Teléfono</th>
-                                        <th>Email</th>
-                                        <th>Última Compra</th>
-                                        <th>Estado</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Fecha</th>
+                                        <th>Disponibilidad</th>
+                                        <th>Categoria</th>
+                                        <th>Área destinada</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes");
-                                        if (clientes != null) {
-                                            for (Cliente cliente : clientes) {
+                                        List<Producto> productos = (List<Producto>) request.getAttribute("productos");
+                                        if (productos != null) {
+                                            for (Producto producto : productos) {
                                     %>
                                     <tr>
-                                        <td><%= cliente.getCodigo_cliente() %></td>
+                                        <td><%= producto.getId_producto() %></td>
                                         <td>
-                                            <strong><%= cliente.getNombre_cliente() %></strong>
+                                            <strong><%= producto.getNombre_producto() %></strong>
                                         </td>
-                                        <td><%= cliente.getTelefono_cliente() %></td>
-                                        <td><%= cliente.getNombre_cliente()+"0"+cliente.getCodigo_cliente() %>@gmail.com</td>
-                                        <td>15/10/2023</td>
-                                        <td>
-                                            <span class="badge bg-success">Activo</span>
-                                        </td>
+                                        <td><%= producto.getDescripcion_producto() %></td>
+                                        <td><%= producto.getCantidad_producto()%></td>
+                                        <td><%= producto.getFecha_producto()%></td>
+                                        <td><%= producto.getDisponibilidad_producto() %></td>
+                                        <td><%= producto.getCategoria_producto()%></td>
+                                        <td><%= producto.getArea_producto()%></td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary">
                                                 <i class="bi bi-eye"></i>
