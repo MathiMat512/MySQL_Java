@@ -1,4 +1,9 @@
-SELECT * FROM bd_prueba.tb_productos;
+use bd_prueba;
+
+SELECT * FROM tb_productos;
+SELECT * FROM tb_categoria;
+SELECT * FROM tb_area;
+
 CREATE TABLE `tb_productos` (
   `id_producto` int NOT NULL,
   `nombre_producto` varchar(200) DEFAULT NULL,
@@ -52,4 +57,3 @@ CREATE TABLE `bd_prueba`.`tb_area` (
 FROM tb_productos p
 INNER JOIN tb_area a ON p.id_area = a.id_area
 INNER JOIN tb_categoria c ON p.id_categoria = c.id_categoria;
-
