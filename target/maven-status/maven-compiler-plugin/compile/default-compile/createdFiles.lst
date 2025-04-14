@@ -4,3 +4,4 @@ com\inventario\dao\MySQLConnection.class
 com\mycompany\inventariado\JakartaRestConfiguration.class
 com\inventario\controllers\ProductoController.class
 com\inventario\dao\ProductoDAO.class
+com\inventario\dao\ProductoDAOImpl.class

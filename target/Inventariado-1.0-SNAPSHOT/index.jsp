@@ -13,7 +13,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3 col-lg-2 d-md-block sidebar px-0">
+                <div class="col-md-3 col-lg-2 d-md-block sidebar px-0" style="width: 250px;">
                     <div class="p-4">
                         <h4 class="text-white mb-4">
                             <i class="bi bi-box-seam"></i> Inventario
@@ -81,60 +81,65 @@
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-circle"></i> Nuevo Producto
                             </button>
-
+                            
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo producto</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" method = "POST"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="text" class="form-control mb-3" placeholder="Nombre" aria-label="Nombre">
-                                            <input type="text" class="form-control mb-3" placeholder="Descripción" aria-label="Descripción">
-                                            <input type="text" class="form-control mb-3" placeholder="Cantidad" aria-label="Cantidad">
-                                            <input type="text" class="form-control mb-3" placeholder="Fecha de adquisición" aria-label="Fecha de adquisición">
+                                            
+                                            <form id="formAgregarProducto" action="/Inventariado-1.0-SNAPSHOT/productos" method="POST">
+                                                <input type="number" class="form-control mb-3" name="id_producto" placeholder="Id producto" aria-label="Id" required min="1">
+                                                <input type="text" class="form-control mb-3" name="nombre_producto" placeholder="Nombre" aria-label="Nombre" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Descripción" aria-label="Descripción" required>
+                                                <input type="number" class="form-control mb-3" name="cantidad_producto" placeholder="Cantidad" aria-label="Cantidad" required min="1">
+                                                <input type="date" class="form-control mb-3" name="fecha_producto" placeholder="Fecha de adquisición" aria-label="Fecha de adquisición" required>
 
-                                            <div class="btn-group mb-3 w-100">
-                                                <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Disponibilidad
-                                                </button>
-                                                <ul class="dropdown-menu w-100">
-                                                    <li><a class="dropdown-item" href="#">SI</a></li>
-                                                    <li><a class="dropdown-item" href="#">NO</a></li>
-                                                </ul>
-                                            </div>
+                                                <div class="dropdown mb-3 w-100">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                        Seleccionar disponibilidad
+                                                    </button>
+                                                    <ul class="dropdown-menu w-100">
+                                                        <li><a class="dropdown-item" href="#" data-value="SI" data-input="disponibilidad_producto">SI</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="NO" data-input="disponibilidad_producto">NO</a></li>
+                                                    </ul>
+                                                    <input type="hidden" id="disponibilidad_producto" name="disponibilidad_producto" value="">
+                                                </div>
 
-                                            <div class="btn-group mb-3 w-100">
-                                                <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Área destinada
-                                                </button>
-                                                <ul class="dropdown-menu w-100">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                            </div>
+                                                <div class="dropdown mb-3 w-100">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                        Seleccionar área
+                                                    </button>
+                                                    <ul class="dropdown-menu w-100">
+                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_area">Área Sistemas</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_area">Área Contabilidad</a></li>
+                                                    </ul>
+                                                    <input type="hidden" id="id_area" name="id_area" value="">
+                                                </div>
 
-                                            <div class="btn-group mb-3 w-100">
-                                                <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Categoría
-                                                </button>
-                                                <ul class="dropdown-menu w-100">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                            </div>
+                                                <div class="dropdown mb-3 w-100">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                        Seleccionar categoría
+                                                    </button>
+                                                    <ul class="dropdown-menu w-100">
+                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_categoria">Cables de video</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_categoria">Teclados</a></li>
+                                                    </ul>
+                                                    <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                                                </div>
+                                            </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="button" class="btn btn-primary">Guardar cambios</button>
+                                            <button type="submit" class="btn btn-primary" form="formAgregarProducto">Guardar cambios</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
 
@@ -144,13 +149,10 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">Productos Totales</h6>
+                                            <h6 class="card-title">Usuarios Totales</h6>
                                             <h2 class="mb-0">1,254</h2>
                                         </div>
-                                        <i class="bi bi-people-fill fs-1"></i>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="badge bg-light text-primary">+12% este mes</span>
+                                        <i class="bi bi-person fs-1"></i>
                                     </div>
                                 </div>
                             </div>
@@ -159,14 +161,11 @@
                             <div class="card bg-success text-white">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="card-title">Clientes Activos</h6>
-                                            <h2 class="mb-0">1,042</h2>
+                                        <div> 
+                                            <h6 class="card-title">Productos Totales</h6>
+                                            <h2 class="mb-0"><%= producto.contabilizarProductos%></h2>
                                         </div>
-                                        <i class="bi bi-person-check fs-1"></i>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="badge bg-light text-success">+8% este mes</span>
+                                        <i class="bi bi-cart4 fs-1"></i>
                                     </div>
                                 </div>
                             </div>
@@ -176,13 +175,10 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">Clientes Inactivos</h6>
+                                            <h6 class="card-title">Categorias Totales</h6>
                                             <h2 class="mb-0">212</h2>
                                         </div>
-                                        <i class="bi bi-person-x fs-1"></i>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="badge bg-light text-warning">-3% este mes</span>
+                                        <i class="bi bi-list-check fs-1"></i>
                                     </div>
                                 </div>
                             </div>
@@ -192,13 +188,10 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">Nuevos este mes</h6>
+                                            <h6 class="card-title">Áreas Registradas</h6>
                                             <h2 class="mb-0">134</h2>
                                         </div>
-                                        <i class="bi bi-person-plus fs-1"></i>
-                                    </div>
-                                    <div class="mt-2">
-                                        <span class="badge bg-light text-info">+15% vs mes pasado</span>
+                                        <i class="bi bi-grid-fill fs-1"></i>
                                     </div>
                                 </div>
                             </div>
@@ -300,11 +293,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
