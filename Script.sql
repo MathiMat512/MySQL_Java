@@ -1,5 +1,15 @@
 SELECT * FROM tb_productos;
 
+Select count(cantidad_producto) as Tipos_de_productos from tb_productos ;
+
+Select sum(cantidad_producto) from tb_productos;
+
+Select count(*) as Total_Categorias from tb_categoria;
+
+Select count(*) as Total_Areas from tb_area;
+
+Select sum(cantidad_producto) AS Total_De_Productos from tb_productos;
+
 -- Store Procedure de Agregar un Producto
 DELIMITER //
 CREATE PROCEDURE spAgregarProducto(

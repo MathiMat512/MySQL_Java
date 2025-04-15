@@ -13,8 +13,7 @@ public class Producto {
     int id_categoria;
     String categoria_producto;
     
-    public Producto(int id_producto, String nombre_producto, String descripcion_producto, int cantidad_producto, Date fecha_producto, 
-                    String disponibilidad_producto,int id_area, String nombre_area, int id_categoria,String categoria_producto) {
+    public Producto(int id_producto, String nombre_producto, String descripcion_producto, int cantidad_producto, Date fecha_producto, String disponibilidad_producto, int id_area, String nombre_area, int id_categoria, String categoria_producto) {
         this.id_producto = id_producto;
         this.nombre_producto = nombre_producto;
         this.categoria_producto = categoria_producto;

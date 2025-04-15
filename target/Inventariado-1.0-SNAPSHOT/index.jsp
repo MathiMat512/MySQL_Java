@@ -81,7 +81,7 @@
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-circle"></i> Nuevo Producto
                             </button>
-                            
+
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -90,13 +90,13 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            
+
                                             <form id="formAgregarProducto" action="/Inventariado-1.0-SNAPSHOT/productos" method="POST">
                                                 <input type="number" class="form-control mb-3" name="id_producto" placeholder="Id producto" aria-label="Id" required min="1">
                                                 <input type="text" class="form-control mb-3" name="nombre_producto" placeholder="Nombre" aria-label="Nombre" required>
-                                                <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Descripción" aria-label="Descripción" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Descripción" aria-label="Descripción" >
                                                 <input type="number" class="form-control mb-3" name="cantidad_producto" placeholder="Cantidad" aria-label="Cantidad" required min="1">
-                                                <input type="date" class="form-control mb-3" name="fecha_producto" placeholder="Fecha de adquisición" aria-label="Fecha de adquisición" required>
+                                                <input type="date" class="form-control mb-3" name="fecha_producto" placeholder="Fecha de adquisición" aria-label="Fecha de adquisición">
 
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
@@ -149,10 +149,10 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">Usuarios Totales</h6>
-                                            <h2 class="mb-0">1,254</h2>
+                                            <h6 class="card-title">Cantidades Totales</h6>
+                                            <h2 class="mb-0"><%= request.getAttribute("Total_Cantidades")%></h2>
                                         </div>
-                                        <i class="bi bi-person fs-1"></i>
+                                        <i class="bi bi-check-circle-fill fs-1"></i>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +161,9 @@
                             <div class="card bg-success text-white">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div> 
-                                            <h6 class="card-title">Productos Totales</h6>
-                                            <h2 class="mb-0"><%= producto.contabilizarProductos%></h2>
+                                        <div>
+                                            <h6 class="card-title">Productos Registrados</h6>
+                                            <h2 class="mb-0"><%= request.getAttribute("Productos_Registrados")%></h2>
                                         </div>
                                         <i class="bi bi-cart4 fs-1"></i>
                                     </div>
@@ -244,12 +244,62 @@
                                             <td><%= producto.getId_categoria()%></td>
                                             <td><%= producto.getCategoria_producto()%></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= producto.getId_producto() %>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger">
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= producto.getId_producto() %>">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
+
+                                                <div class="modal fade" id="EditarProducto<%= producto.getId_producto() %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h5>Nombre</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getNombre_producto()%>">
+                                                                <h5>Descripción</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getDescripcion_producto()%>">
+                                                                <h5>Cantidad</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getCantidad_producto()%>">
+                                                                <h5>Fecha de adquisición</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getFecha_producto()%>">
+                                                                <h5>Disponibilidad</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getDisponibilidad_producto()%>">
+                                                                <h5>Área de destino</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getNombre_area()%>">
+                                                                <h5>Categoria de producto</h5>
+                                                                <input class="form-control mb-3" value="<%=producto.getCategoria_producto()%>">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-primary">Guardar cambios</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <div class="modal fade" id="EliminarProducto<%= producto.getId_producto() %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                ¿Estás seguro que deseas eliminar el producto <strong><%=producto.getNombre_producto()%></strong> con ID <strong><%=producto.getId_producto()%></strong>?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                             </td>
                                         </tr>
                                         <%
