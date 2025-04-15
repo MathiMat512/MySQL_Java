@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class MySQLConnection {
     public static final String driver = "com.mysql.jdbc.Driver";
-    public static final String database = "bd_prueba";
+    public static final String database = "bd_inventario";
     public static final String hostname = "localhost";
     public static final String port = "3306";
     public static final String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false&serverTimezone=UTC";
