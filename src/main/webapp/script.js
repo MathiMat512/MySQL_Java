@@ -1,17 +1,23 @@
-document.querySelectorAll('.dropdown-menu .dropdown-item').forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        e.preventDefault();
-        const value = this.getAttribute('data-value');
-        const inputId = this.getAttribute('data-input');
-        const dropdown = this.closest('.dropdown').querySelector('.dropdown-toggle');
+function seleccionarMarca(descripcion_marca, id_marca, el) {
+    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
+    dropdown.innerText = descripcion_marca;
+    document.getElementById("cod_marca").value = id_marca;
+}
 
-        dropdown.textContent = this.textContent.trim();
+function seleccionarProveedor(descripcion_proveedor, id_proveedor, el) {
+    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
+    dropdown.innerText = descripcion_proveedor;
+    document.getElementById("cod_proveedor").value = id_proveedor;
+}
 
-        document.getElementById(inputId).value = value;
-    });
-});
+function seleccionarArea(descripcion_area, id_area, el) {
+    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
+    dropdown.innerText = descripcion_area;
+    document.getElementById("cod_area").value = id_area;
+}
 
-function seleccionarMarca(descripcion_marca, id_marca) {
-        document.querySelector(".dropdown-toggle").innerText = descripcion_marca;
-        document.getElementById("disponibilidad_producto").value = id_marca;
-    }
+function seleccionarCategoria(descripcion_categoria, id_categoria, el) {
+    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
+    dropdown.innerText = descripcion_categoria;
+    document.getElementById("id_categoria").value = id_categoria;
+}

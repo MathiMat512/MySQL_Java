@@ -18,15 +18,13 @@ public class MarcaDAO {
         while (rs.next()) {
             Marca marca = new Marca(
             rs.getInt("id_marca"),
-            rs.getString("descripcion_marca"),
-            rs.getString("modelo")
+            rs.getString("descripcion_marca")
             );
             marcas.add(marca);
         }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        
         return marcas;
     }
 }

@@ -1,3 +1,6 @@
+<%@page import="com.inventario.models.Categoria"%>
+<%@page import="com.inventario.models.Proveedor"%>
+<%@page import="com.inventario.models.Area"%>
 <%@page import="com.inventario.models.Marca"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, com.inventario.models.Producto" %>
@@ -92,11 +95,15 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form id="formAgregarProducto" action="/Inventariado-1.0-SNAPSHOT/productos" method="POST">
-                                                <input type="text" class="form-control mb-3" name="nombre_producto" placeholder="Nombre" required>
-                                                <input type="date" class="form-control mb-3" name="fecha_producto">
-                                                <input type="date" class="form-control mb-3" name="fecha_producto">
+                                            <form id="formAgregarProducto" action="productos" method="POST">
+                                                <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Nombre" required>
+                                                <input type="text" class="form-control mb-3" name="und_medida" placeholder="Unidad de medida">
+                                                <label>Fecha de recepción</label>
+                                                <input type="date" class="form-control mb-3" name="fecha_recepcion">
+                                                <label>Fecha de salida</label>
+                                                <input type="date" class="form-control mb-3" name="fecha_salida">
                                                 <input type="number" class="form-control mb-3" name="cantidad_producto" placeholder="Cantidad" required min="1">
+                                                <label>Marca</label>
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
                                                         Marca
@@ -107,63 +114,76 @@
                                                             if (marcas != null) {
                                                                 for (Marca marca : marcas) {
                                                         %>
-                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarMarca('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>')"><%= marca.getDescripcion_marca()%></a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarMarca('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', this)"><%= marca.getDescripcion_marca()%></a></li>
                                                             <%
                                                                     }
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="disponibilidad_producto" name="disponibilidad_producto" value="">
+                                                    <input type="hidden" id="cod_marca" name="cod_marca" value="">
                                                 </div>
-
-                                                <div class="dropdown mb-3 w-100">
-                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
-                                                        Modelo
-                                                    </button>
-                                                    <ul class="dropdown-menu w-100">
-                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_area">Área Sistemas</a></li>
-                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_area">Área Contabilidad</a></li>
-                                                    </ul>
-                                                    <input type="hidden" id="id_area" name="id_area" value="">
-                                                </div>
-
+                                                <label>Proveedor</label>
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
                                                         Proveedor
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
-                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_categoria">Cables de video</a></li>
-                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_categoria">Teclados</a></li>
+                                                        <%
+                                                            List<Proveedor> proveedores = (List<Proveedor>) request.getAttribute("proveedores");
+                                                            if (proveedores != null) {
+                                                                for (Proveedor proveedor : proveedores) {
+                                                        %>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarProveedor('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', this)"><%= proveedor.getDescripcion_proveedor()%></a></li>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
                                                     </ul>
-                                                    <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                                                    <input type="hidden" id="cod_proveedor" name="cod_proveedor" value="">
                                                 </div>
 
+                                                <label>Área</label>
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
                                                         Área
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
-                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_categoria">Cables de video</a></li>
-                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_categoria">Teclados</a></li>
+                                                        <%
+                                                            List<Area> areas = (List<Area>) request.getAttribute("areas");
+                                                            if (areas != null) {
+                                                                for (Area area : areas) {
+                                                        %>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarArea('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', this)"><%= area.getDescripcion_area()%></a></li>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
                                                     </ul>
-                                                    <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                                                    <input type="hidden" id="cod_area" name="cod_area" value="">
                                                 </div>
 
+                                                <label>Categoría</label>
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
-                                                        Categoria
+                                                        Categoría
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
-                                                        <li><a class="dropdown-item" href="#" data-value="1" data-input="id_categoria">Cables de video</a></li>
-                                                        <li><a class="dropdown-item" href="#" data-value="2" data-input="id_categoria">Teclados</a></li>
+                                                        <%
+                                                            List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+                                                            if (categorias != null) {
+                                                                for (Categoria categoria : categorias) {
+                                                        %>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarCategoria('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', this)"><%= categoria.getDescripcion_categoria()%></a></li>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
                                                     </ul>
                                                     <input type="hidden" id="id_categoria" name="id_categoria" value="">
                                                 </div>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary" form="formAgregarProducto">Guardar cambios</button>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary" form="formAgregarProducto">Guardar cambios</button>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +267,6 @@
                                             <th>Fecha salida</th>
                                             <th>Cantidad</th>
                                             <th>Marca</th>
-                                            <th>Modelo</th>
                                             <th>Proveedor</th>
                                             <th>Área</th>
                                             <th>Categoria</th>
@@ -269,7 +288,6 @@
                                             <td><%= producto.getFecha_salida()%></td>
                                             <td><%= producto.getCantidad_producto()%></td>
                                             <td><%= producto.getDescripcion_marca()%></td>
-                                            <td><%= producto.getModelo()%></td>
                                             <td><%= producto.getDescripcion_proveedor()%></td>
                                             <td><%= producto.getDescripcion_area()%></td>
                                             <td><%= producto.getDescripcion_categoria()%></td>
@@ -301,8 +319,6 @@
                                                                 <input type="date" class="form-control mb-2" value="<%= producto.getFecha_salida()%>">
                                                                 <h6>Marca</h6>
                                                                 <input class="form-control mb-2" value="<%= producto.getDescripcion_marca()%>">
-                                                                <h6>Modelo</h6>
-                                                                <input class="form-control mb-2" value="<%= producto.getModelo()%>">
                                                                 <h6>Proveedor</h6>
                                                                 <input class="form-control mb-2" value="<%= producto.getDescripcion_proveedor()%>">
                                                                 <h6>Área</h6>

@@ -11,7 +11,6 @@ public class Producto {
     Integer cantidad_producto;
     Integer cod_marca;
     String descripcion_marca;
-    String modelo;
     Integer cod_proveedor;
     String descripcion_proveedor;
     Integer cod_area;
@@ -20,7 +19,7 @@ public class Producto {
     String descripcion_categoria;
 
     public Producto(Integer id_producto, String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida,
-            Integer cantidad_producto, Integer cod_marca, String descripcion_marca, String modelo, Integer cod_proveedor,
+            Integer cantidad_producto, Integer cod_marca, String descripcion_marca, Integer cod_proveedor,
             String descripcion_proveedor, Integer cod_area, String descripcion_area, Integer id_categoria, String descripcion_categoria) {
         this.id_producto = id_producto;
         this.descripcion_producto = descripcion_producto;
@@ -30,13 +29,25 @@ public class Producto {
         this.cantidad_producto = cantidad_producto;
         this.cod_marca = cod_marca;
         this.descripcion_marca = descripcion_marca;
-        this.modelo = modelo;
         this.cod_proveedor = cod_proveedor;
         this.descripcion_proveedor = descripcion_proveedor;
         this.cod_area = cod_area;
         this.descripcion_area = descripcion_area;
         this.id_categoria = id_categoria;
         this.descripcion_categoria = descripcion_categoria;
+    }
+    
+    public Producto(String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida, Integer cantidad_producto,
+            Integer cod_marca, Integer cod_proveedor, Integer cod_area, Integer id_categoria ){
+        this.descripcion_producto = descripcion_producto;
+        this.und_medida = und_medida;
+        this.fecha_recepcion = fecha_recepcion;
+        this.fecha_salida = fecha_salida;
+        this.cantidad_producto = cantidad_producto;
+        this.cod_marca = cod_marca;
+        this.cod_proveedor = cod_proveedor;
+        this.cod_area = cod_area;
+        this.id_categoria = id_categoria;
     }
 
     public Integer getId_producto() {
@@ -103,14 +114,6 @@ public class Producto {
         this.descripcion_marca = descripcion_marca;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public Integer getCod_proveedor() {
         return cod_proveedor;
     }
@@ -157,15 +160,5 @@ public class Producto {
 
     public void setDescripcion_categoria(String descripcion_categoria) {
         this.descripcion_categoria = descripcion_categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" + "id_producto=" + id_producto + ", descripcion_producto=" + descripcion_producto + ", und_medida=" 
-                + und_medida + ", fecha_recepcion=" + fecha_recepcion + ", fecha_salida=" + fecha_salida + ", cantidad_producto="
-                + cantidad_producto + ", cod_marca=" + cod_marca + ", descripcion_marca=" + descripcion_marca + ", modelo="
-                + modelo + ", cod_proveedor=" + cod_proveedor + ", descripcion_proveedor=" + descripcion_proveedor + ", cod_area="
-                + cod_area + ", descripcion_area=" + descripcion_area + ", id_categoria=" + id_categoria + ", descripcion_categoria=" 
-                + descripcion_categoria + '}';
     }
 }

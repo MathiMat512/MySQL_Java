@@ -9,11 +9,11 @@ com\inventario\models\Categoria.class
 com\inventario\models\Marca.class
 com\inventario\dao\ProductoDAO.class
 com\inventario\dao\ProveedorDAO.class
+com\inventario\dao\IProductoDAO.class
 com\mycompany\inventariado\resources\JakartaEE11Resource.class
 com\inventario\controllers\MarcaController.class
 com\inventario\models\Proveedor.class
 com\inventario\dao\MarcaDAO.class
 com\mycompany\inventariado\JakartaRestConfiguration.class
 com\inventario\controllers\ProductoController.class
-com\inventario\dao\AreDAO.class
-com\inventario\dao\ProductoDAOImpl.class
+com\inventario\dao\AreaDAO.class
