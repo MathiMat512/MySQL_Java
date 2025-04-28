@@ -13,7 +13,6 @@ public interface IProductoDAO {
     public int productosRegistrados();
     public void buscarProductoporId();
     public void guardarProducto(Producto producto);
-    /*public void actualizarProducto(Producto producto);
+    public void actualizarProducto(Producto producto);
     public void eliminarProducto(int id);
-    */
 }

@@ -21,3 +21,16 @@ function seleccionarCategoria(descripcion_categoria, id_categoria, el) {
     dropdown.innerText = descripcion_categoria;
     document.getElementById("id_categoria").value = id_categoria;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("formAgregarProducto").addEventListener("submit", function(event) {
+        if (!document.getElementById("cod_marca").value ||
+            !document.getElementById("cod_proveedor").value ||
+            !document.getElementById("cod_area").value ||
+            !document.getElementById("id_categoria").value) {
+
+            event.preventDefault(); // Evita el submit
+            alert("No debes dejar ningún dropdown vacío");
+        }
+    });
+});

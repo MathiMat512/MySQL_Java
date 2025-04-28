@@ -65,41 +65,42 @@ public class ProductoController extends HttpServlet {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Ingresando al servlet...");
+
+        String idProducto = request.getParameter("id_producto");
+        String accion = request.getParameter("accion");
+
         String descripcion_producto = request.getParameter("descripcion_producto");
         String und_medida = request.getParameter("und_medida");
         Date fecha_recepcion = parseDateOrDefault(request.getParameter("fecha_recepcion"), null);
         Date fecha_salida = parseDateOrDefault(request.getParameter("fecha_salida"), null);
-        Integer cantidad_producto = Integer.parseInt(request.getParameter("cantidad_producto"));
-        Integer cod_marca = Integer.parseInt(request.getParameter("cod_marca"));
-        Integer cod_proveedor = Integer.parseInt(request.getParameter("cod_proveedor"));
-        Integer cod_area = Integer.parseInt(request.getParameter("cod_area"));
-        Integer id_categoria = Integer.parseInt(request.getParameter("id_categoria"));
+        Integer cantidad_producto = Integer.valueOf(request.getParameter("cantidad_producto"));
+        Integer cod_marca = Integer.valueOf(request.getParameter("cod_marca"));
+        Integer cod_proveedor = Integer.valueOf(request.getParameter("cod_proveedor"));
+        Integer cod_area = Integer.valueOf(request.getParameter("cod_area"));
+        Integer id_categoria = Integer.valueOf(request.getParameter("id_categoria"));
 
         Producto producto = new Producto(descripcion_producto, und_medida, fecha_recepcion, fecha_salida,
                 cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria);
-        productoDAO.guardarProducto(producto);
+        if (idProducto != null && !idProducto.isEmpty()) {
+            // Si hay un ID, es una actualización
+            producto.setId_producto(Integer.valueOf(idProducto));
+            productoDAO.actualizarProducto(producto); // <<-- LLAMAR AL MÉTODO DE ACTUALIZACIÓN
+        } else {
+            // Si no hay ID, es un nuevo producto
+            productoDAO.guardarProducto(producto); // <<-- CREAR NUEVO
+        }
         response.sendRedirect("productos");
     }
 
-    /*protected void doPut(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException{
-        String nombre = request.getParameter("nombre");
-        String descripcion = request.getParameter("descripcion");
-        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-        Date fecha = Date.valueOf(request.getParameter("fecha"));
-        String disponibilidad = request.getParameter("disponibilidad");
-        int id_area = Integer.parseInt(request.getParameter("id_area"));
-        int id_categoria = Integer.parseInt(request.getParameter("id_categoria"));
-        
-        Producto producto = new Producto(0, nombre, descripcion, cantidad, fecha, disponibilidad, id_area, "", id_categoria, "");
-        productoDAO.actualizarProducto(producto);
-        response.sendRedirect("productos");
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
     }
-    
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+
+    /*protected void doDelete(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
         int id_producto = request.getParameter("id_producto");
         
