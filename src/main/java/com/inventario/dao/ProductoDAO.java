@@ -6,6 +6,8 @@ import com.inventario.models.Proveedor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductoDAO implements IProductoDAO {
 
@@ -195,7 +197,6 @@ public class ProductoDAO implements IProductoDAO {
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
-            // Asignar parámetros
             ps.setString(1, producto.getDescripcion_producto());
             ps.setString(2, producto.getUnd_medida());
             ps.setDate(3, producto.getFecha_recepcion());
@@ -206,10 +207,6 @@ public class ProductoDAO implements IProductoDAO {
             ps.setInt(8, producto.getCod_area());
             ps.setInt(9, producto.getId_categoria());
             ps.setInt(10, producto.getId_producto());
-
-            // Debug: Imprimir ID y consulta
-            System.out.println("[DEBUG] Actualizando producto ID: " + producto.getId_producto());
-            System.out.println("[DEBUG] SQL: " + ps.toString()); // Muestra la consulta con parámetros
 
             int filasAfectadas = ps.executeUpdate();
 
@@ -225,9 +222,24 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void eliminarProducto(int id) {
-        String consulta = "";
+    public void eliminarProducto(Producto producto) /*throws SQLException */{
+        String consulta = "DELETE FROM tb_productos WHERE id_producto = ?";
 
-        throw new UnsupportedOperationException("Not supported yet.");
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setInt(1, producto.getId_producto());
+            int filasAfectadas = ps.executeUpdate();
+
+            if (filasAfectadas == 0) {
+                throw new SQLException("No se encontró el producto con ID: " + producto.getId_producto());
+            }
+        } catch (SQLException e) {
+            try {
+                throw new SQLException("Error al eliminar el producto: " + e.getMessage(), e);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
+    
 }

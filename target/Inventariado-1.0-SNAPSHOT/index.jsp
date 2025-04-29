@@ -93,7 +93,7 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo producto</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <!--<div class="modal-body">
+                                        <div class="modal-body">
 
                                             <form id="formAgregarProducto" action="productos" method="POST">
                                                 <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Nombre" required>
@@ -105,7 +105,7 @@
                                                 <input type="number" class="form-control mb-3" name="cantidad_producto" placeholder="Cantidad">
                                                 <label>Marca</label>
                                                 <div class="dropdown mb-3 w-100">
-                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" id="marcaDropdownButtonAdd" data-bs-toggle="dropdown">
                                                         Marca
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
@@ -114,17 +114,18 @@
                                                             if (marcas != null) {
                                                                 for (Marca marca : marcas) {
                                                         %>
-                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarMarca('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', this)"><%= marca.getDescripcion_marca()%></a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarMarcaAdd('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', this)"><%= marca.getDescripcion_marca()%></a></li>
                                                             <%
                                                                     }
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="cod_marca" name="cod_marca" value="" required>
+                                                    <input type="hidden" id="cod_marca_add" name="cod_marca" value="" required>
                                                 </div>
+
                                                 <label>Proveedor</label>
                                                 <div class="dropdown mb-3 w-100">
-                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" id="proveedorDropdownButtonAdd" data-bs-toggle="dropdown">
                                                         Proveedor
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
@@ -133,18 +134,18 @@
                                                             if (proveedores != null) {
                                                                 for (Proveedor proveedor : proveedores) {
                                                         %>
-                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarProveedor('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', this)"><%= proveedor.getDescripcion_proveedor()%></a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarProveedorAdd('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', this)"><%= proveedor.getDescripcion_proveedor()%></a></li>
                                                             <%
                                                                     }
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="cod_proveedor" name="cod_proveedor" value="" required>
+                                                    <input type="hidden" id="cod_proveedor_add" name="cod_proveedor" value="" required>
                                                 </div>
 
                                                 <label>Área</label>
                                                 <div class="dropdown mb-3 w-100">
-                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" id="areaDropdownButtonAdd" data-bs-toggle="dropdown">
                                                         Área
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
@@ -153,18 +154,18 @@
                                                             if (areas != null) {
                                                                 for (Area area : areas) {
                                                         %>
-                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarArea('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', this)"><%= area.getDescripcion_area()%></a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarAreaAdd('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', this)"><%= area.getDescripcion_area()%></a></li>
                                                             <%
                                                                     }
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="cod_area" name="cod_area" value="" required>
+                                                    <input type="hidden" id="cod_area_add" name="cod_area" value="" required>
                                                 </div>
 
                                                 <label>Categoría</label>
                                                 <div class="dropdown mb-3 w-100">
-                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" id="categoriaDropdownButtonAdd" data-bs-toggle="dropdown">
                                                         Categoría
                                                     </button>
                                                     <ul class="dropdown-menu w-100">
@@ -173,18 +174,18 @@
                                                             if (categorias != null) {
                                                                 for (Categoria categoria : categorias) {
                                                         %>
-                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarCategoria('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', this)"><%= categoria.getDescripcion_categoria()%></a></li>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarCategoriaAdd('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', this)"><%= categoria.getDescripcion_categoria()%></a></li>
                                                             <%
                                                                     }
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="id_categoria" name="id_categoria" value="" required>
+                                                    <input type="hidden" id="cod_categoria_add" name="id_categoria" value="" required>
                                                 </div>
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                 <button type="submit" class="btn btn-primary" form="formAgregarProducto">Guardar cambios</button>
                                             </form>
-                                        </div>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -306,7 +307,7 @@
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form id="formActualizarProducto" action="productos" method="POST">
+                                                            <form id="formActualizarProducto_<%= producto.getId_producto()%>" action="productos" method="POST">
                                                                 <div class="modal-body">
                                                                     <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
                                                                     <input type="hidden" name="accion" value="actualizar">
@@ -321,72 +322,79 @@
                                                                     <h6>Cantidad</h6>
                                                                     <input class="form-control mb-2" name="cantidad_producto" value="<%= producto.getCantidad_producto()%>">
                                                                     <label>Marca de producto</label>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown" aria-expanded="false" id="marcaDropdownButton">
-                                                                        <%= producto.getDescripcion_marca()%>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
-                                                                        <%
-                                                                            if (marcas != null) {
-                                                                                for (Marca marca : marcas) {
-                                                                        %>
-                                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarMarca('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', this)"><%= marca.getDescripcion_marca()%></a></li>
-                                                                            <%
-                                                                                    }
-                                                                                }
-                                                                            %>
-                                                                    </ul>
-                                                                    <input type="hidden" id="cod_marca" name="cod_marca" value="<%= producto.getCod_marca()%>">
+                                                                    <div class="dropdown mb-3 w-100">
+                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                id="marcaDropdownButton_<%= producto.getId_producto()%>" 
+                                                                                data-bs-toggle="dropdown">
+                                                                            <%= producto.getDescripcion_marca()%>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu w-100">
+                                                                            <% for (Marca marca : marcas) {%>
+                                                                            <li><a class="dropdown-item" href="#" 
+                                                                                   onclick="seleccionarMarcaEdit('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', <%= producto.getId_producto()%>)">
+                                                                                    <%= marca.getDescripcion_marca()%>
+                                                                                </a></li>
+                                                                                <% }%>
+                                                                        </ul>
+                                                                        <input type="hidden" id="cod_marca_<%= producto.getId_producto()%>" name="cod_marca" value="<%= producto.getCod_marca()%>">
+                                                                    </div>
+
                                                                     <label>Proveedor</label>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
-                                                                        <%= producto.getDescripcion_proveedor()%>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
-                                                                        <%
-                                                                            if (proveedores != null) {
-                                                                                for (Proveedor proveedor : proveedores) {
-                                                                        %>
-                                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarProveedor('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', this)"><%= proveedor.getDescripcion_proveedor()%></a></li>
-                                                                            <%
-                                                                                    }
-                                                                                }
-                                                                            %>
-                                                                    </ul>
-                                                                    <input type="hidden" id="cod_proveedor" name="cod_proveedor" value="<%= producto.getCod_proveedor()%>">
+                                                                    <div class="dropdown mb-3 w-100">
+                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100"
+                                                                                id="proveedorDropdownButton_<%= producto.getId_producto()%>"
+                                                                                data-bs-toggle="dropdown">
+                                                                            <%= producto.getDescripcion_proveedor()%>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu w-100">
+                                                                            <% for (Proveedor proveedor : proveedores) {%>
+                                                                            <li><a class="dropdown-item" href="#" 
+                                                                                   onclick="seleccionarProveedorEdit('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', <%= producto.getId_producto()%>)">
+                                                                                    <%= proveedor.getDescripcion_proveedor()%>
+                                                                                </a></li>
+                                                                                <% }%>
+                                                                        </ul>
+                                                                        <input type="hidden" id="cod_proveedor_<%= producto.getId_producto()%>" name="cod_proveedor" value="<%= producto.getCod_proveedor()%>">
+                                                                    </div>
+
                                                                     <label>Área</label>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
-                                                                        <%= producto.getDescripcion_area()%>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
-                                                                        <%
-                                                                            if (areas != null) {
-                                                                                for (Area area : areas) {
-                                                                        %>
-                                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarArea('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', this)"><%= area.getDescripcion_area()%></a></li>
-                                                                            <%
-                                                                                    }
-                                                                                }
-                                                                            %>
-                                                                    </ul>
-                                                                    <input type="hidden" id="cod_area" name="cod_area" value="<%= producto.getCod_area()%>">
+                                                                    <div class="dropdown mb-3 w-100">
+                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                id="areaDropdownButton_<%= producto.getId_producto()%>"
+                                                                                data-bs-toggle="dropdown">
+                                                                            <%= producto.getDescripcion_area()%>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu w-100">
+                                                                            <% for (Area area : areas) {%>
+                                                                            <li><a class="dropdown-item" href="#" 
+                                                                                   onclick="seleccionarAreaEdit('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', <%= producto.getId_producto()%>)">
+                                                                                    <%= area.getDescripcion_area()%>
+                                                                                </a></li>
+                                                                                <% }%>
+                                                                        </ul>
+                                                                        <input type="hidden" id="cod_area_<%= producto.getId_producto()%>" name="cod_area" value="<%= producto.getCod_area()%>">
+                                                                    </div>
+
                                                                     <label>Categoría</label>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown">
-                                                                        <%= producto.getDescripcion_categoria()%>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu w-100">
-                                                                        <%
-                                                                            if (categorias != null) {
-                                                                                for (Categoria categoria : categorias) {
-                                                                        %>
-                                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarCategoria('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', this)"><%= categoria.getDescripcion_categoria()%></a></li>
-                                                                            <%
-                                                                                    }
-                                                                                }
-                                                                            %>
-                                                                    </ul>
-                                                                    <input type="hidden" id="id_categoria" name="id_categoria" value="<%= producto.getId_categoria()%>">
+                                                                    <div class="dropdwon mb-3 w-100">
+                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                id="categoriaDropdownButton_<%= producto.getId_producto()%>"
+                                                                                data-bs-toggle="dropdown">
+                                                                            <%= producto.getDescripcion_categoria()%>
+                                                                        </button>
+                                                                        <ul class="dropdown-menu w-100">
+                                                                            <% for (Categoria categoria : categorias) {%>
+                                                                            <li><a class="dropdown-item" href="#" 
+                                                                                   onclick="seleccionarCategoriaEdit('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', <%= producto.getId_producto()%>)">
+                                                                                    <%= categoria.getDescripcion_categoria()%>
+                                                                                </a></li>
+                                                                                <% }%>
+                                                                        </ul>
+                                                                        <input type="hidden" id="cod_categoria_<%= producto.getId_producto()%>" name="id_categoria" value="<%= producto.getId_categoria()%>">
+                                                                    </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto">Guardar cambios</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= producto.getId_producto()%>">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -396,19 +404,23 @@
 
                                                 <div class="modal fade" id="EliminarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <form action="productos" method="DELETE">
+                                                            <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
+                                                            <input type="hidden" name="accion" value="eliminar">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ¿Estás seguro que deseas eliminar el producto <strong><%=producto.getDescripcion_producto()%></strong> con ID <strong><%=producto.getId_producto()%></strong>?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                ¿Estás seguro que deseas eliminar el producto <strong><%=producto.getDescripcion_producto()%></strong> con ID <strong><%=producto.getId_producto()%></strong>?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                <button type="button" class="btn btn-danger">Eliminar</button>
-                                                            </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>

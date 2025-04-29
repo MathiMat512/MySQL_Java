@@ -49,6 +49,10 @@ public class Producto {
         this.cod_area = cod_area;
         this.id_categoria = id_categoria;
     }
+    
+    public Producto(Integer id_producto){
+        this.id_producto = id_producto;
+    }
 
     public Integer getId_producto() {
         return id_producto;

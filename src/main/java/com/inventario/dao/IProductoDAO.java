@@ -14,5 +14,5 @@ public interface IProductoDAO {
     public void buscarProductoporId();
     public void guardarProducto(Producto producto);
     public void actualizarProducto(Producto producto);
-    public void eliminarProducto(int id);
+    public void eliminarProducto(Producto producto);
 }

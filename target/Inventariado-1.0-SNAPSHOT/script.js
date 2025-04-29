@@ -1,25 +1,61 @@
-function seleccionarMarca(descripcion_marca, id_marca, el) {
-    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
-    dropdown.innerText = descripcion_marca;
-    document.getElementById("cod_marca").value = id_marca;
+function seleccionarMarcaAdd(descripcion, idMarca) {
+    document.getElementById("cod_marca_add").value = idMarca;
+    document.getElementById("marcaDropdownButtonAdd").textContent = descripcion;
 }
 
-function seleccionarProveedor(descripcion_proveedor, id_proveedor, el) {
-    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
-    dropdown.innerText = descripcion_proveedor;
-    document.getElementById("cod_proveedor").value = id_proveedor;
+function seleccionarMarcaEdit(descripcion, idMarca, idProducto) {
+    document.getElementById(`cod_marca_${idProducto}`).value = idMarca;
+    document.getElementById(`marcaDropdownButton_${idProducto}`).textContent = descripcion;
 }
 
-function seleccionarArea(descripcion_area, id_area, el) {
-    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
-    dropdown.innerText = descripcion_area;
-    document.getElementById("cod_area").value = id_area;
+function seleccionarProveedorAdd(proveedor, codProveedor) {
+    document.getElementById("cod_proveedor_add").value = codProveedor;
+    document.getElementById("proveedorDropdownButtonAdd").textContent = proveedor;
 }
 
-function seleccionarCategoria(descripcion_categoria, id_categoria, el) {
-    const dropdown = el.closest(".dropdown").querySelector(".dropdown-toggle");
-    dropdown.innerText = descripcion_categoria;
-    document.getElementById("id_categoria").value = id_categoria;
+function seleccionarProveedorEdit(descripcion, codProveedor, idProducto) {
+    document.getElementById(`cod_proveedor_${idProducto}`).value = codProveedor;
+    document.getElementById(`proveedorDropdownButton_${idProducto}`).textContent = descripcion;
+}
+
+function seleccionarAreaAdd(area, codArea) {
+    document.getElementById("cod_area_add").value = codArea;
+    document.getElementById("areaDropdownButtonAdd").textContent = area;
+}
+
+function seleccionarAreaEdit(area, codArea, idProducto) {
+    document.getElementById(`cod_area_${idProducto}`).value = codArea;
+    document.getElementById(`areaDropdownButton_${idProducto}`).textContent = area;
+}
+
+function seleccionarCategoriaAdd(categoria, codCategoria) {
+    document.getElementById("cod_categoria_add").value = codCategoria;
+    document.getElementById("categoriaDropdownButtonAdd").textContent = categoria;
+}
+
+function seleccionarCategoriaEdit(categoria, codCategoria, idProducto) {
+    document.getElementById(`cod_categoria_${idProducto}`).value = codCategoria;
+    document.getElementById(`categoriaDropdownButton_${idProducto}`).textContent = categoria;
+}
+
+function eliminarProducto(id) {
+    if (confirm('¿Estás seguro de eliminar el producto con ID ' + id + '?')) {
+        fetch('productos?id_producto=' + id, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Producto eliminado con éxito');
+                window.location.href = 'productos'; // Redirigir a la lista de productos
+            } else {
+                alert('Error al eliminar el producto');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error en la solicitud');
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
