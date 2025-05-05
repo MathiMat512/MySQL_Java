@@ -8,6 +8,10 @@ public class Proveedor {
         this.id_proveedor = id_proveedor;
         this.descripcion_proveedor = descripcion_proveedor;
     }
+    
+    public Proveedor(String descripcion_proveedor){
+        this.descripcion_proveedor = descripcion_proveedor;
+    }
 
     public Integer getId_proveedor() {
         return id_proveedor;

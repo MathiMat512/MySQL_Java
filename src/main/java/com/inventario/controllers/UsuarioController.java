@@ -4,7 +4,9 @@ import com.inventario.dao.CategoriaDAO;
 import com.inventario.dao.MarcaDAO;
 import com.inventario.dao.ProductoDAO;
 import com.inventario.dao.ProveedorDAO;
+import com.inventario.dao.UsuarioDAO;
 import com.inventario.models.Proveedor;
+import com.inventario.models.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,8 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/proveedores")
-public class ProveedorController extends HttpServlet {
+@WebServlet("/usuarios")
+public class UsuarioController extends HttpServlet{
     
     private static final long serialVersionUID = 1L;
     private ProductoDAO productoDAO;
@@ -22,6 +24,7 @@ public class ProveedorController extends HttpServlet {
     private AreaDAO areaDAO;
     private ProveedorDAO proveedorDAO;
     private CategoriaDAO categoriaDAO;
+    private UsuarioDAO usuarioDAO;
     
     @Override
     public void init() throws ServletException {
@@ -30,17 +33,18 @@ public class ProveedorController extends HttpServlet {
         areaDAO = new AreaDAO();
         proveedorDAO = new ProveedorDAO();
         categoriaDAO = new CategoriaDAO();
+        usuarioDAO = new UsuarioDAO();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        List<Proveedor> listarProveedores = proveedorDAO.listarProveedores();
-        request.setAttribute("proveedores", listarProveedores);
+        List<Usuario> listarUsuarios = usuarioDAO.listarUsuarios();
+        request.setAttribute("usuarios", listarUsuarios);
         
-        request.getRequestDispatcher("proveedores.jsp").forward(request, response);
+        request.getRequestDispatcher("usuarios.jsp").forward(request, response);
     }
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    /*protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         String descripcion_proveedor = request.getParameter("descripcion_proveedor");
         
@@ -49,5 +53,5 @@ public class ProveedorController extends HttpServlet {
         proveedorDAO.guardarProveedor(proveedor);
         
         response.sendRedirect("proveedores");
-    }
+    }*/
 }

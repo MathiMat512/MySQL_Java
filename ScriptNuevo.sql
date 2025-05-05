@@ -38,4 +38,7 @@ set descripcion_producto = "Teclado",
     cod_area = 2, 
     id_categoria = 1
 where id_producto = 2;
+
+select * from tb_usuarios;
+INSERT INTO tb_proveedor (descripcion_proveedor) values ("Aliexpress")
     

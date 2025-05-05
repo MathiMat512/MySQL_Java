@@ -76,8 +76,7 @@ public class ProductoDAO implements IProductoDAO {
         try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement stmt = conn.prepareStatement(consulta); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Proveedor proveedor = new Proveedor(
-                        rs.getInt("id_proveedor"),
-                        rs.getString("descripcion_proveedor")
+                                                rs.getString("descripcion_proveedor")
                 );
                 proveedores.add(proveedor);
             }

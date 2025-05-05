@@ -9,7 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sistema de Inventario</title>
+        <title>Productos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="styles.css" rel="stylesheet">
@@ -40,7 +40,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/proveedores">
                                     <i class="bi bi-truck"></i> Proveedores
                                 </a>
                             </li>
@@ -56,12 +56,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="bi bi-graph-up"></i> Reportes
+                                    <i class="bi bi-graph-up"></i> Actividades
                                 </a>
                             </li>
                             <li class="nav-item mt-4">
                                 <a class="nav-link" href="#">
-                                    <i class="bi bi-gear"></i> Configuración
+                                    <i class="bi bi-person-circle"></i> Usuarios
                                 </a>
                             </li>
                         </ul>
@@ -273,176 +273,179 @@
                                             <th>Categoria</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <%
-                                            List<Producto> productos = (List<Producto>) request.getAttribute("productos");
-                                            if (productos != null) {
-                                                for (Producto producto : productos) {
-                                        %>
-                                        <tr>
-                                            <td><%= producto.getId_producto()%></td>
-                                            <td>
-                                                <strong><%= producto.getDescripcion_producto()%></strong>
-                                            </td>
-                                            <td><%= producto.getUnd_medida()%></td>
-                                            <td><%= producto.getFecha_recepcion()%></td>
-                                            <td><%= producto.getFecha_salida()%></td>
-                                            <td><%= producto.getCantidad_producto()%></td>
-                                            <td><%= producto.getDescripcion_marca()%></td>
-                                            <td><%= producto.getDescripcion_proveedor()%></td>
-                                            <td><%= producto.getDescripcion_area()%></td>
-                                            <td><%= producto.getDescripcion_categoria()%></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= producto.getId_producto()%>">
-                                                    <i class="bi bi-pencil"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= producto.getId_producto()%>">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
+                                        <tbody>
+                                            <%
+                                                List<Producto> productos = (List<Producto>) request.getAttribute("productos");
+                                                if (productos != null) {
+                                                    for (Producto producto : productos) {
+                                            %>
+                                            <tr>
+                                                <td><%= producto.getId_producto()%></td>
+                                                <td>
+                                                    <strong><%= producto.getDescripcion_producto()%></strong>
+                                                </td>
+                                                <td><%= producto.getUnd_medida()%></td>
+                                                <td><%= producto.getFecha_recepcion()%></td>
+                                                <td><%= producto.getFecha_salida()%></td>
+                                                <td><%= producto.getCantidad_producto()%></td>
+                                                <td><%= producto.getDescripcion_marca()%></td>
+                                                <td><%= producto.getDescripcion_proveedor()%></td>
+                                                <td><%= producto.getDescripcion_area()%></td>
+                                                <td><%= producto.getDescripcion_categoria()%></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= producto.getId_producto()%>">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= producto.getId_producto()%>">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning">
+                                                        <i class="bi bi-eye-slash"></i>
+                                                    </button>
 
-                                                <div class="modal fade" id="EditarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div class="modal fade" id="EditarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar producto</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form id="formActualizarProducto_<%= producto.getId_producto()%>" action="productos" method="POST">
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
+                                                                        <input type="hidden" name="accion" value="actualizar">
+                                                                        <h6>Descripción</h6>
+                                                                        <input class="form-control mb-2" name="descripcion_producto" value="<%= producto.getDescripcion_producto()%>">
+                                                                        <h6>Unidad de Medida</h6>
+                                                                        <input class="form-control mb-2" name="und_medida" value="<%= producto.getUnd_medida()%>">
+                                                                        <h6>Fecha Recepción</h6>
+                                                                        <input type="date" class="form-control mb-2" name="fecha_recepcion" value="<%= producto.getFecha_recepcion()%>">
+                                                                        <h6>Fecha Salida</h6>
+                                                                        <input type="date" class="form-control mb-2" name="fecha_salida" value="<%= producto.getFecha_salida()%>">
+                                                                        <h6>Cantidad</h6>
+                                                                        <input class="form-control mb-2" name="cantidad_producto" value="<%= producto.getCantidad_producto()%>">
+                                                                        <label>Marca de producto</label>
+                                                                        <div class="dropdown mb-3 w-100">
+                                                                            <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                    id="marcaDropdownButton_<%= producto.getId_producto()%>" 
+                                                                                    data-bs-toggle="dropdown">
+                                                                                <%= producto.getDescripcion_marca()%>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu w-100">
+                                                                                <% for (Marca marca : marcas) {%>
+                                                                                <li><a class="dropdown-item" href="#" 
+                                                                                       onclick="seleccionarMarcaEdit('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', <%= producto.getId_producto()%>)">
+                                                                                        <%= marca.getDescripcion_marca()%>
+                                                                                    </a></li>
+                                                                                    <% }%>
+                                                                            </ul>
+                                                                            <input type="hidden" id="cod_marca_<%= producto.getId_producto()%>" name="cod_marca" value="<%= producto.getCod_marca()%>">
+                                                                        </div>
+
+                                                                        <label>Proveedor</label>
+                                                                        <div class="dropdown mb-3 w-100">
+                                                                            <button type="button" class="btn btn-primary dropdown-toggle w-100"
+                                                                                    id="proveedorDropdownButton_<%= producto.getId_producto()%>"
+                                                                                    data-bs-toggle="dropdown">
+                                                                                <%= producto.getDescripcion_proveedor()%>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu w-100">
+                                                                                <% for (Proveedor proveedor : proveedores) {%>
+                                                                                <li><a class="dropdown-item" href="#" 
+                                                                                       onclick="seleccionarProveedorEdit('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', <%= producto.getId_producto()%>)">
+                                                                                        <%= proveedor.getDescripcion_proveedor()%>
+                                                                                    </a></li>
+                                                                                    <% }%>
+                                                                            </ul>
+                                                                            <input type="hidden" id="cod_proveedor_<%= producto.getId_producto()%>" name="cod_proveedor" value="<%= producto.getCod_proveedor()%>">
+                                                                        </div>
+
+                                                                        <label>Área</label>
+                                                                        <div class="dropdown mb-3 w-100">
+                                                                            <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                    id="areaDropdownButton_<%= producto.getId_producto()%>"
+                                                                                    data-bs-toggle="dropdown">
+                                                                                <%= producto.getDescripcion_area()%>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu w-100">
+                                                                                <% for (Area area : areas) {%>
+                                                                                <li><a class="dropdown-item" href="#" 
+                                                                                       onclick="seleccionarAreaEdit('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', <%= producto.getId_producto()%>)">
+                                                                                        <%= area.getDescripcion_area()%>
+                                                                                    </a></li>
+                                                                                    <% }%>
+                                                                            </ul>
+                                                                            <input type="hidden" id="cod_area_<%= producto.getId_producto()%>" name="cod_area" value="<%= producto.getCod_area()%>">
+                                                                        </div>
+
+                                                                        <label>Categoría</label>
+                                                                        <div class="dropdwon mb-3 w-100">
+                                                                            <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                    id="categoriaDropdownButton_<%= producto.getId_producto()%>"
+                                                                                    data-bs-toggle="dropdown">
+                                                                                <%= producto.getDescripcion_categoria()%>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu w-100">
+                                                                                <% for (Categoria categoria : categorias) {%>
+                                                                                <li><a class="dropdown-item" href="#" 
+                                                                                       onclick="seleccionarCategoriaEdit('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', <%= producto.getId_producto()%>)">
+                                                                                        <%= categoria.getDescripcion_categoria()%>
+                                                                                    </a></li>
+                                                                                    <% }%>
+                                                                            </ul>
+                                                                            <input type="hidden" id="cod_categoria_<%= producto.getId_producto()%>" name="id_categoria" value="<%= producto.getId_categoria()%>">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                            <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= producto.getId_producto()%>">Guardar cambios</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <form id="formActualizarProducto_<%= producto.getId_producto()%>" action="productos" method="POST">
-                                                                <div class="modal-body">
-                                                                    <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
-                                                                    <input type="hidden" name="accion" value="actualizar">
-                                                                    <h6>Descripción</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= producto.getDescripcion_producto()%>">
-                                                                    <h6>Unidad de Medida</h6>
-                                                                    <input class="form-control mb-2" name="und_medida" value="<%= producto.getUnd_medida()%>">
-                                                                    <h6>Fecha Recepción</h6>
-                                                                    <input type="date" class="form-control mb-2" name="fecha_recepcion" value="<%= producto.getFecha_recepcion()%>">
-                                                                    <h6>Fecha Salida</h6>
-                                                                    <input type="date" class="form-control mb-2" name="fecha_salida" value="<%= producto.getFecha_salida()%>">
-                                                                    <h6>Cantidad</h6>
-                                                                    <input class="form-control mb-2" name="cantidad_producto" value="<%= producto.getCantidad_producto()%>">
-                                                                    <label>Marca de producto</label>
-                                                                    <div class="dropdown mb-3 w-100">
-                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
-                                                                                id="marcaDropdownButton_<%= producto.getId_producto()%>" 
-                                                                                data-bs-toggle="dropdown">
-                                                                            <%= producto.getDescripcion_marca()%>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu w-100">
-                                                                            <% for (Marca marca : marcas) {%>
-                                                                            <li><a class="dropdown-item" href="#" 
-                                                                                   onclick="seleccionarMarcaEdit('<%= marca.getDescripcion_marca()%>', '<%= marca.getId_marca()%>', <%= producto.getId_producto()%>)">
-                                                                                    <%= marca.getDescripcion_marca()%>
-                                                                                </a></li>
-                                                                                <% }%>
-                                                                        </ul>
-                                                                        <input type="hidden" id="cod_marca_<%= producto.getId_producto()%>" name="cod_marca" value="<%= producto.getCod_marca()%>">
-                                                                    </div>
+                                                        </div>
+                                                    </div> 
 
-                                                                    <label>Proveedor</label>
-                                                                    <div class="dropdown mb-3 w-100">
-                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100"
-                                                                                id="proveedorDropdownButton_<%= producto.getId_producto()%>"
-                                                                                data-bs-toggle="dropdown">
-                                                                            <%= producto.getDescripcion_proveedor()%>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu w-100">
-                                                                            <% for (Proveedor proveedor : proveedores) {%>
-                                                                            <li><a class="dropdown-item" href="#" 
-                                                                                   onclick="seleccionarProveedorEdit('<%= proveedor.getDescripcion_proveedor()%>', '<%= proveedor.getId_proveedor()%>', <%= producto.getId_producto()%>)">
-                                                                                    <%= proveedor.getDescripcion_proveedor()%>
-                                                                                </a></li>
-                                                                                <% }%>
-                                                                        </ul>
-                                                                        <input type="hidden" id="cod_proveedor_<%= producto.getId_producto()%>" name="cod_proveedor" value="<%= producto.getCod_proveedor()%>">
+                                                    <div class="modal fade" id="EliminarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form action="productos" method="POST">
+                                                                <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
+                                                                <input type="hidden" name="accion" value="eliminar">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-
-                                                                    <label>Área</label>
-                                                                    <div class="dropdown mb-3 w-100">
-                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
-                                                                                id="areaDropdownButton_<%= producto.getId_producto()%>"
-                                                                                data-bs-toggle="dropdown">
-                                                                            <%= producto.getDescripcion_area()%>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu w-100">
-                                                                            <% for (Area area : areas) {%>
-                                                                            <li><a class="dropdown-item" href="#" 
-                                                                                   onclick="seleccionarAreaEdit('<%= area.getDescripcion_area()%>', '<%= area.getId_area()%>', <%= producto.getId_producto()%>)">
-                                                                                    <%= area.getDescripcion_area()%>
-                                                                                </a></li>
-                                                                                <% }%>
-                                                                        </ul>
-                                                                        <input type="hidden" id="cod_area_<%= producto.getId_producto()%>" name="cod_area" value="<%= producto.getCod_area()%>">
-                                                                    </div>
-
-                                                                    <label>Categoría</label>
-                                                                    <div class="dropdwon mb-3 w-100">
-                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
-                                                                                id="categoriaDropdownButton_<%= producto.getId_producto()%>"
-                                                                                data-bs-toggle="dropdown">
-                                                                            <%= producto.getDescripcion_categoria()%>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu w-100">
-                                                                            <% for (Categoria categoria : categorias) {%>
-                                                                            <li><a class="dropdown-item" href="#" 
-                                                                                   onclick="seleccionarCategoriaEdit('<%= categoria.getDescripcion_categoria()%>', '<%= categoria.getId_categoria()%>', <%= producto.getId_producto()%>)">
-                                                                                    <%= categoria.getDescripcion_categoria()%>
-                                                                                </a></li>
-                                                                                <% }%>
-                                                                        </ul>
-                                                                        <input type="hidden" id="cod_categoria_<%= producto.getId_producto()%>" name="id_categoria" value="<%= producto.getId_categoria()%>">
+                                                                    <div class="modal-body">
+                                                                        ¿Estás seguro que deseas eliminar el producto <strong><%=producto.getDescripcion_producto()%></strong> con ID <strong><%=producto.getId_producto()%></strong>?
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= producto.getId_producto()%>">Guardar cambios</button>
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div> 
-
-                                                <div class="modal fade" id="EliminarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form action="productos" method="DELETE">
-                                                            <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
-                                                            <input type="hidden" name="accion" value="eliminar">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    ¿Estás seguro que deseas eliminar el producto <strong><%=producto.getDescripcion_producto()%></strong> con ID <strong><%=producto.getId_producto()%></strong>?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <%
-                                            }
-                                        } else {
-                                        %>
-                                        <tr>
-                                            <td colspan="7" class="text-center py-4">
-                                                <i class="bi bi-people display-4 text-muted"></i>
-                                                <h5 class="mt-3">No hay productos registrados</h5>
-                                                <p class="text-muted">Agrega nuevos productos para comenzar</p>
-                                                <button class="btn btn-primary mt-2">
-                                                    <i class="bi bi-plus-circle"></i> Agregar producto
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <%
-                                            }
-                                        %>
-                                    </tbody>
+                                                </td>
+                                            </tr>
+                                            <%
+                                                }
+                                            } else {
+                                            %>
+                                            <tr>
+                                                <td colspan="7" class="text-center py-4">
+                                                    <i class="bi bi-people display-4 text-muted"></i>
+                                                    <h5 class="mt-3">No hay productos registrados</h5>
+                                                    <p class="text-muted">Agrega nuevos productos para comenzar</p>
+                                                    <button class="btn btn-primary mt-2">
+                                                        <i class="bi bi-plus-circle"></i> Agregar producto
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <%
+                                                }
+                                            %>
+                                        </tbody>
                                 </table>
                             </div>
 

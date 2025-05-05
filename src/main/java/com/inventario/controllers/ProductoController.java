@@ -18,8 +18,6 @@ import com.inventario.models.Area;
 import com.inventario.models.Categoria;
 import com.inventario.models.Marca;
 import com.inventario.models.Proveedor;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 
 @WebServlet("/productos")
 public class ProductoController extends HttpServlet {
@@ -71,9 +69,14 @@ public class ProductoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String idProducto = request.getParameter("id_producto");
         String accion = request.getParameter("accion");
-        
+
+        if ("eliminar".equals(accion)) {
+            doDelete(request, response); // Reutiliza tu lógica de DELETE
+            return;
+        }
+
+        String idProducto = request.getParameter("id_producto");
         String descripcion_producto = request.getParameter("descripcion_producto");
         String und_medida = request.getParameter("und_medida");
         Date fecha_recepcion = parseDateOrDefault(request.getParameter("fecha_recepcion"), null);
@@ -94,7 +97,6 @@ public class ProductoController extends HttpServlet {
             // Si no hay ID, es un nuevo producto
             productoDAO.guardarProducto(producto); // <<-- CREAR NUEVO
         }
-        
         response.sendRedirect("productos");
     }
 
@@ -103,43 +105,31 @@ public class ProductoController extends HttpServlet {
             throws ServletException, IOException {
     }
 
-@Override
+    @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
 
         try {
             // Validar el parámetro id_producto
             String idParam = request.getParameter("id_producto");
             if (idParam == null || idParam.trim().isEmpty()) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.write("{\"error\": \"El ID del producto es requerido\"}");
                 return;
             }
-
             int id_producto;
             try {
                 id_producto = Integer.parseInt(idParam);
             } catch (NumberFormatException e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.write("{\"error\": \"El ID del producto debe ser un número válido\"}");
                 return;
             }
-
             // Crear el objeto Producto y eliminar
             Producto producto = new Producto(id_producto);
             productoDAO.eliminarProducto(producto);
-
-            // Respuesta exitosa
-            response.setStatus(HttpServletResponse.SC_OK);
-            out.write("{\"mensaje\": \"Producto eliminado con éxito\"}");
+            
+            response.sendRedirect("productos");
         } catch (Exception e) {
-            // Manejo de errores
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.write("{\"error\": \"Error al eliminar el producto: " + e.getMessage() + "\"}");
+            System.out.println("Error al eliminar producto: "+e);
         }
     }
-    
+
     private Date parseDateOrDefault(String value, Date defaultValue) {
         try {
             return (value != null && !value.trim().isEmpty()) ? Date.valueOf(value) : defaultValue;

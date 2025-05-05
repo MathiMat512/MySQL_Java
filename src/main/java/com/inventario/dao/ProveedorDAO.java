@@ -17,8 +17,8 @@ public class ProveedorDAO {
             ResultSet rs = ps.executeQuery()){
             while(rs.next()){
                 Proveedor proveedor = new Proveedor(
-                rs.getInt("id_proveedor"),
-                rs.getString("descripcion_proveedor")
+                        rs.getInt("id_proveedor"),
+                        rs.getString("descripcion_proveedor")
                 );
                 proveedores.add(proveedor);
         }
@@ -26,5 +26,24 @@ public class ProveedorDAO {
             e.getMessage();
         }
         return proveedores;
+    }
+    
+    public void guardarProveedor(Proveedor proveedor){
+        String consulta = "INSERT INTO tb_proveedor (descripcion_proveedor) VALUES (?)";
+        
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement st = conexion.prepareStatement(consulta)) {
+
+            st.setString(1, proveedor.getDescripcion_proveedor());
+
+            int filasInsertadas = st.executeUpdate();
+            if (filasInsertadas > 0) {
+                System.out.println("Proveedor guardado correctamente.");
+            } else {
+                System.out.println("Error al guardar el proveedor.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
