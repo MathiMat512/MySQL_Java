@@ -22,6 +22,13 @@ INNER JOIN
 INNER JOIN 
 	tb_area d ON a.cod_area = d.id_area
 INNER JOIN 
-	tb_categoria e ON a.id_categoria = e.id_categoria;
-    
-UPDATE tb_proveedor (descripcion_proveedor) WHERE id_proveedor=?
+	tb_categoria e ON a.id_categoria = e.id_categoria
+where estado_producto=1
+order by a.id_producto;
+
+
+Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado_producto=1;
+
+Select count(cantidad_producto) as Productos_Registrados from tb_productos where estado_producto=1;
+
+UPDATE tb_productos SET estado_producto = 1 WHERE id_producto = 3;

@@ -1,21 +1,24 @@
 package com.inventario.models;
 
 public class Usuario {
+
     private Integer id_usuario;
     private String username;
     private String usuario;
     private String nombre;
     private String apellido;
     private int id_rol;
-    
+    private String descripcion;
+
     public Usuario(Integer id_usuario, String username, String usuario, String nombre,
-            String apellido, int id_rol){
+            String apellido, int id_rol, String descripcion) {
         this.id_usuario = id_usuario;
         this.username = username;
         this.usuario = usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.id_rol = id_rol;
+        this.descripcion = descripcion;
     }
 
     public Integer getId_usuario() {
@@ -65,6 +68,12 @@ public class Usuario {
     public void setId_rol(int id_rol) {
         this.id_rol = id_rol;
     }
-    
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

@@ -8,3 +8,5 @@ select * from tb_marca;
 select * from tb_proveedor;
 select * from tb_area;
 select * from tb_categoria;
+
+select * from tb_proveedor where estado_proveedor = 1

@@ -220,32 +220,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card bg-warning text-dark">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="card-title">Categorias Totales</h6>
-                                            <h2 class="mb-0">212</h2>
-                                        </div>
-                                        <i class="bi bi-list-check fs-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-info text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="card-title">Áreas Registradas</h6>
-                                            <h2 class="mb-0">134</h2>
-                                        </div>
-                                        <i class="bi bi-grid-fill fs-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="card">
@@ -271,7 +245,6 @@
                                             <th>Proveedor</th>
                                             <th>Área</th>
                                             <th>Categoria</th>
-                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -300,9 +273,6 @@
                                                     </button>
                                                     <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= producto.getId_producto()%>">
                                                         <i class="bi bi-trash"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-outline-warning">
-                                                        <i class="bi bi-eye-slash"></i>
                                                     </button>
 
                                                     <div class="modal fade" id="EditarProducto<%= producto.getId_producto()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -435,14 +405,6 @@
                                             } else {
                                             %>
                                             <tr>
-                                                <td colspan="7" class="text-center py-4">
-                                                    <i class="bi bi-people display-4 text-muted"></i>
-                                                    <h5 class="mt-3">No hay productos registrados</h5>
-                                                    <p class="text-muted">Agrega nuevos productos para comenzar</p>
-                                                    <button class="btn btn-primary mt-2">
-                                                        <i class="bi bi-plus-circle"></i> Agregar producto
-                                                    </button>
-                                                </td>
                                             </tr>
                                             <%
                                                 }

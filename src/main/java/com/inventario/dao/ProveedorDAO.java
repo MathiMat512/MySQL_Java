@@ -12,7 +12,7 @@ public class ProveedorDAO {
 
     public List<Proveedor> listarProveedores() {
         List<Proveedor> proveedores = new ArrayList<>();
-        String consulta = "select * from tb_proveedor";
+        String consulta = "select * from tb_proveedor where estado_proveedor = 1";
 
         try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement ps = conn.prepareStatement(consulta); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -59,6 +59,20 @@ public class ProveedorDAO {
             ps.executeUpdate(); // Execute the UPDATE statement
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void eliminarProveedor(Proveedor proveedor){
+        String consulta = "UPDATE tb_proveedor SET estado_proveedor = 0 where id_proveedor = ? ";
+        
+        try(Connection conexion = MySQLConnection.conectarMySQL();
+                PreparedStatement ps = conexion.prepareStatement(consulta)){
+            
+            ps.setInt(1, proveedor.getId_proveedor());
+            ps.executeQuery();
+            
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }

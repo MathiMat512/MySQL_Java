@@ -38,7 +38,7 @@ public class Producto {
     }
     
     public Producto(String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida, Integer cantidad_producto,
-            Integer cod_marca, Integer cod_proveedor, Integer cod_area, Integer id_categoria ){
+            Integer cod_marca, Integer cod_proveedor, Integer cod_area, Integer id_categoria){
         this.descripcion_producto = descripcion_producto;
         this.und_medida = und_medida;
         this.fecha_recepcion = fecha_recepcion;

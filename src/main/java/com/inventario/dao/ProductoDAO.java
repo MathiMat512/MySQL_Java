@@ -39,7 +39,8 @@ public class ProductoDAO implements IProductoDAO {
                 + "	tb_area d ON a.cod_area = d.id_area\n"
                 + "INNER JOIN \n"
                 + "	tb_categoria e ON a.id_categoria = e.id_categoria\n"
-                + "order by a.id_producto";
+                + "where estado_producto = 1 "
+                + "order by a.id_producto;";
 
         try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement ps = conn.prepareStatement(consulta); ResultSet rs = ps.executeQuery(consulta)) {
 
@@ -109,7 +110,7 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public int totalCantidades() {
-        String consulta = "Select sum(cantidad_producto) AS Total_Cantidades from tb_productos;";
+        String consulta = "Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado_producto=1;";
         int totalCantidad = 0;
 
         try (Connection conexion = MySQLConnection.conectarMySQL()) {
@@ -128,7 +129,7 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public int productosRegistrados() {
-        String consulta = "Select count(cantidad_producto) as Productos_Registrados from tb_productos;";
+        String consulta = "Select count(cantidad_producto) as Productos_Registrados from tb_productos where estado_producto=1;";
         int totalProductos = 0;
 
         try (Connection conexion = MySQLConnection.conectarMySQL()) {
@@ -153,8 +154,8 @@ public class ProductoDAO implements IProductoDAO {
     @Override
     public void guardarProducto(Producto producto) {
         String consulta = "INSERT INTO tb_productos (descripcion_producto, und_medida, fecha_recepcion, fecha_salida, "
-                + "cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria, estado_producto) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement st = conexion.prepareStatement(consulta)) {
 
@@ -216,7 +217,7 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public void eliminarProducto(Producto producto) /*throws SQLException */{
-        String consulta = "DELETE FROM tb_productos WHERE id_producto = ?";
+        String consulta = "UPDATE tb_productos SET estado_producto=0 WHERE id_producto=?";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
@@ -233,6 +234,6 @@ public class ProductoDAO implements IProductoDAO {
                 Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
     }
-    
 }

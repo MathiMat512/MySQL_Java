@@ -158,11 +158,8 @@
                                                 <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProveedor<%= proveedor.getId_proveedor()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProveedor<%= proveedor.getId_proveedor()%>">
                                                     <i class="bi bi-trash"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning">
-                                                    <i class="bi bi-eye-slash"></i>
                                                 </button>
 
                                                 <div class="modal fade" id="EditarProveedor<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -189,14 +186,14 @@
                                                     </div>
                                                 </div> 
 
-                                                <div class="modal fade" id="EliminarProducto<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EliminarProveedor<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                        <form action="productos" method="POST">
-                                                            <input type="hidden" name="id_producto" value="<%= proveedor.getId_proveedor()%>">
+                                                        <form action="proveedores" method="POST">
+                                                            <input type="hidden" name="id_proveedor" value="<%= proveedor.getId_proveedor()%>">
                                                             <input type="hidden" name="accion" value="eliminar">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar proveedor</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">

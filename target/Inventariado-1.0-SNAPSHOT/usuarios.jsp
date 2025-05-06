@@ -163,16 +163,13 @@
                                             </td>
                                             <td><%= usuario.getNombre()%></td>
                                             <td><%= usuario.getApellido()%></td>
-                                            <td><%= usuario.getId_rol()%></td>
+                                            <td><%= usuario.getDescripcion()%></td>
                                             <td>
                                                 <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= usuario.getId_usuario()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= usuario.getId_usuario()%>">
                                                     <i class="bi bi-trash"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-warning">
-                                                    <i class="bi bi-eye-slash"></i>
                                                 </button>
 
                                                 <div class="modal fade" id="EditarProducto<%= usuario.getId_usuario()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

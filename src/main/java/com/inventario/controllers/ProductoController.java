@@ -71,24 +71,32 @@ public class ProductoController extends HttpServlet {
 
         String accion = request.getParameter("accion");
 
-        if ("eliminar".equals(accion)) {
-            doDelete(request, response); // Reutiliza tu lógica de DELETE
-            return;
-        }
-
         String idProducto = request.getParameter("id_producto");
         String descripcion_producto = request.getParameter("descripcion_producto");
         String und_medida = request.getParameter("und_medida");
         Date fecha_recepcion = parseDateOrDefault(request.getParameter("fecha_recepcion"), null);
         Date fecha_salida = parseDateOrDefault(request.getParameter("fecha_salida"), null);
-        Integer cantidad_producto = Integer.valueOf(request.getParameter("cantidad_producto"));
-        Integer cod_marca = Integer.valueOf(request.getParameter("cod_marca"));
-        Integer cod_proveedor = Integer.valueOf(request.getParameter("cod_proveedor"));
-        Integer cod_area = Integer.valueOf(request.getParameter("cod_area"));
-        Integer id_categoria = Integer.valueOf(request.getParameter("id_categoria"));
+        Integer cantidad_producto = parseIntegerOrDefault(request.getParameter("cantidad_producto"), 0);
+        Integer cod_marca = parseIntegerOrDefault(request.getParameter("cod_marca"), null); // Puedes usar null si no es obligatorio
+        Integer cod_proveedor = parseIntegerOrDefault(request.getParameter("cod_proveedor"), null); // Igualmente, puedes usar null si no es obligatorio
+        Integer cod_area = parseIntegerOrDefault(request.getParameter("cod_area"), null);
+        Integer id_categoria = parseIntegerOrDefault(request.getParameter("id_categoria"), null);
 
         Producto producto = new Producto(descripcion_producto, und_medida, fecha_recepcion, fecha_salida,
                 cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria);
+
+        if ("eliminar".equals(accion)) {
+            if (idProducto != null && !idProducto.isEmpty()) {
+                producto.setId_producto(Integer.valueOf(idProducto));
+                productoDAO.eliminarProducto(producto);
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del producto es necesario para eliminar.");
+                return;
+            }
+            response.sendRedirect("productos");
+            return;
+        }
+
         if (idProducto != null && !idProducto.isEmpty()) {
             // Si hay un ID, es una actualización
             producto.setId_producto(Integer.valueOf(idProducto));
@@ -106,28 +114,8 @@ public class ProductoController extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            // Validar el parámetro id_producto
-            String idParam = request.getParameter("id_producto");
-            if (idParam == null || idParam.trim().isEmpty()) {
-                return;
-            }
-            int id_producto;
-            try {
-                id_producto = Integer.parseInt(idParam);
-            } catch (NumberFormatException e) {
-                return;
-            }
-            // Crear el objeto Producto y eliminar
-            Producto producto = new Producto(id_producto);
-            productoDAO.eliminarProducto(producto);
-            
-            response.sendRedirect("productos");
-        } catch (Exception e) {
-            System.out.println("Error al eliminar producto: "+e);
-        }
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
     }
 
     private Date parseDateOrDefault(String value, Date defaultValue) {
@@ -136,5 +124,17 @@ public class ProductoController extends HttpServlet {
         } catch (IllegalArgumentException e) {
             return defaultValue;
         }
+    }
+
+    private Integer parseIntegerOrDefault(String param, Integer defaultValue) {
+        if (param != null && !param.trim().isEmpty()) {
+            try {
+                return Integer.valueOf(param);
+            } catch (NumberFormatException e) {
+                // Puedes agregar un log aquí si es necesario
+                return defaultValue;  // Devuelve el valor predeterminado si no se puede convertir
+            }
+        }
+        return defaultValue;  // Devuelve el valor predeterminado si el parámetro es null o vacío
     }
 }

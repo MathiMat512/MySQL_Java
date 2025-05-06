@@ -42,9 +42,23 @@ public class ProveedorController extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
+        String accion = request.getParameter("accion");
+        
         String id_proveedor = request.getParameter("id_proveedor");
         String descripcion_proveedor = request.getParameter("descripcion_proveedor");
         Proveedor proveedor = new Proveedor(descripcion_proveedor);
+        
+        if ("eliminar".equals(accion)) {
+            if (id_proveedor != null && !id_proveedor.isEmpty()) {
+                proveedor.setId_proveedor(Integer.valueOf(id_proveedor));
+                proveedorDAO.eliminarProveedor(proveedor);
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del producto es necesario para eliminar.");
+                return;
+            }
+            response.sendRedirect("proveedores");
+            return;
+        }
         
         if (id_proveedor != null && !id_proveedor.isEmpty()) {
             // Si hay un ID, es una actualización
