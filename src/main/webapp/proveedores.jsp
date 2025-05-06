@@ -59,7 +59,7 @@
                                 </a>
                             </li>
                             <li class="nav-item mt-4">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/usuarios">
                                     <i class="bi bi-person-circle"></i> Usuarios
                                 </a>
                             </li>
@@ -155,7 +155,7 @@
                                                 <strong><%= proveedor.getDescripcion_proveedor()%></strong>
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProveedor<%= proveedor.getId_proveedor()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= proveedor.getId_proveedor()%>">
@@ -165,23 +165,23 @@
                                                     <i class="bi bi-eye-slash"></i>
                                                 </button>
 
-                                                <div class="modal fade" id="EditarProducto<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EditarProveedor<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar proveedor</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form id="formActualizarProducto_<%= proveedor.getId_proveedor()%>" action="productos" method="POST">
+                                                            <form id="formEditarProveedor_<%= proveedor.getId_proveedor()%>" action="proveedores" method="POST">
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="id_producto" value="<%= proveedor.getId_proveedor()%>">
+                                                                    <input type="hidden" name="id_proveedor" value="<%= proveedor.getId_proveedor()%>">
                                                                     <input type="hidden" name="accion" value="actualizar">
                                                                     <h6>Descripción</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= proveedor.getDescripcion_proveedor()%>">
+                                                                    <input class="form-control mb-2" name="descripcion_proveedor" value="<%= proveedor.getDescripcion_proveedor()%>">
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= proveedor.getId_proveedor()%>">Guardar cambios</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formEditarProveedor_<%= proveedor.getId_proveedor()%>">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </form>

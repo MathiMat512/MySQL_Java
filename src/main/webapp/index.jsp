@@ -60,7 +60,7 @@
                                 </a>
                             </li>
                             <li class="nav-item mt-4">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/usuarios">
                                     <i class="bi bi-person-circle"></i> Usuarios
                                 </a>
                             </li>
@@ -263,14 +263,16 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
-                                            <th>Unidad medida</th>
-                                            <th>Fecha recepción</th>
-                                            <th>Fecha salida</th>
+                                            <th>Medida</th>
+                                            <th>F. recepción</th>
+                                            <th>F. salida</th>
                                             <th>Cantidad</th>
                                             <th>Marca</th>
                                             <th>Proveedor</th>
                                             <th>Área</th>
                                             <th>Categoria</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                         <tbody>

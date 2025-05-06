@@ -1,3 +1,4 @@
+<%@page import="com.inventario.models.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="com.inventario.models.Categoria"%>
 <%@page import="com.inventario.models.Proveedor"%>
@@ -9,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Usuarios</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link href="styles.css" rel="stylesheet">
     </head>
     <body>
         <div class="container-fluid">
@@ -36,7 +40,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/proveedores">
                                     <i class="bi bi-truck"></i> Proveedores
                                 </a>
                             </li>
@@ -67,7 +71,7 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-truck text-primary"></i> Gestión de Proveedores
+                            <i class="bi bi-person-circle text-primary"></i> Lista de usuarios registrados
                         </h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <div class="btn-group me-2">
@@ -79,20 +83,24 @@
                                 </button>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="bi bi-plus-circle"></i> Nuevo Proveedor
+                                <i class="bi bi-plus-circle"></i> Nuevo Usuario
                             </button>
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo proveedor</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo usuario</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
 
                                             <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Nombre de usuario" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Nombres" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Apellido" required>
+                                                <input type="password" class="form-control mb-3" name="descripcion_proveedor" placeholder="Contraseña" required>
+                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Rol" required>
                                                 
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                 <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
@@ -101,7 +109,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -111,7 +118,7 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h6 class="card-title">Proveedores Totales</h6>
+                                            <h6 class="card-title">Usuarios Totales</h6>
                                             <h2 class="mb-0"><%= request.getAttribute("Total_Proveedores")%></h2>
                                         </div>
                                         <i class="bi bi-check-circle-fill fs-1"></i>
@@ -124,10 +131,10 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Listado de Proveedores</h5>
+                            <h5 class="mb-0">Listado de Usuarios</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
+                                <input type="text" class="form-control" placeholder="Buscar usuario...">
                             </div>
                         </div>
                         <div class="card-body">
@@ -135,50 +142,56 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID proveedor</th>
-                                            <th>Proveedor</th>
+                                            <th>ID usuario</th>
+                                            <th>Usuario</th>
+                                            <th>Nombres</th>
+                                            <th>Apellido</th>
+                                            <th>Rol</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-                                            List<Proveedor> proveedores = (List<Proveedor>) request.getAttribute("proveedores");
-                                            if (proveedores != null) {
-                                                for (Proveedor proveedor : proveedores) {
+                                            List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
+                                            if (usuarios != null) {
+                                                for (Usuario usuario : usuarios) {
                                         %>
                                         <tr>
-                                            <td><%= proveedor.getId_proveedor()%></td>
+                                            <td><%= usuario.getId_usuario()%></td>
                                             <td>
-                                                <strong><%= proveedor.getDescripcion_proveedor()%></strong>
+                                                <strong><%= usuario.getUsername()%></strong>
                                             </td>
+                                            <td><%= usuario.getNombre()%></td>
+                                            <td><%= usuario.getApellido()%></td>
+                                            <td><%= usuario.getId_rol()%></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= usuario.getId_usuario()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= usuario.getId_usuario()%>">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-warning">
                                                     <i class="bi bi-eye-slash"></i>
                                                 </button>
 
-                                                <div class="modal fade" id="EditarProducto<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EditarProducto<%= usuario.getId_usuario()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar proveedor</h1>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar usuario</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form id="formActualizarProducto_<%= proveedor.getId_proveedor()%>" action="productos" method="POST">
+                                                            <form id="formActualizarProducto_<%= usuario.getId_usuario()%>" action="productos" method="POST">
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="id_producto" value="<%= proveedor.getId_proveedor()%>">
+                                                                    <input type="hidden" name="id_producto" value="<%= usuario.getId_usuario()%>">
                                                                     <input type="hidden" name="accion" value="actualizar">
                                                                     <h6>Descripción</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= proveedor.getDescripcion_proveedor()%>">
+                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getUsername()%>">
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= proveedor.getId_proveedor()%>">Guardar cambios</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= usuario.getId_usuario()%>">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -186,18 +199,18 @@
                                                     </div>
                                                 </div> 
 
-                                                <div class="modal fade" id="EliminarProducto<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EliminarProducto<%= usuario.getId_usuario()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <form action="productos" method="POST">
-                                                            <input type="hidden" name="id_producto" value="<%= proveedor.getId_proveedor()%>">
+                                                            <input type="hidden" name="id_producto" value="<%= usuario.getId_usuario()%>">
                                                             <input type="hidden" name="accion" value="eliminar">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar producto</h1>
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar usuario</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    ¿Estás seguro que deseas eliminar el proveedor <strong><%=proveedor.getDescripcion_proveedor()%></strong> con ID <strong><%=proveedor.getId_proveedor()%></strong>?
+                                                                    ¿Estás seguro que deseas eliminar el usuario <strong><%=usuario.getUsername()%></strong> con ID <strong><%=usuario.getId_usuario()%></strong>?
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -214,14 +227,6 @@
                                         } else {
                                         %>
                                         <tr>
-                                            <td colspan="7" class="text-center py-4">
-                                                <i class="bi bi-people display-4 text-muted"></i>
-                                                <h5 class="mt-3">No hay proveedores registrados</h5>
-                                                <p class="text-muted">Agrega nuevos proveedores para comenzar</p>
-                                                <button class="btn btn-primary mt-2">
-                                                    <i class="bi bi-plus-circle"></i> Agregar proveedor
-                                                </button>
-                                            </td>
                                         </tr>
                                         <%
                                             }

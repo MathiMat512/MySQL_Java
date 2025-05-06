@@ -42,11 +42,18 @@ public class ProveedorController extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
+        String id_proveedor = request.getParameter("id_proveedor");
         String descripcion_proveedor = request.getParameter("descripcion_proveedor");
-        
         Proveedor proveedor = new Proveedor(descripcion_proveedor);
         
-        proveedorDAO.guardarProveedor(proveedor);
+        if (id_proveedor != null && !id_proveedor.isEmpty()) {
+            // Si hay un ID, es una actualización
+            proveedor.setId_proveedor(Integer.valueOf(id_proveedor));
+            proveedorDAO.editarProveedor(proveedor); // <<-- LLAMAR AL MÉTODO DE ACTUALIZACIÓN
+        } else {
+            // Si no hay ID, es un nuevo producto
+            proveedorDAO.guardarProveedor(proveedor); // <<-- CREAR NUEVO
+        }
         
         response.sendRedirect("proveedores");
     }

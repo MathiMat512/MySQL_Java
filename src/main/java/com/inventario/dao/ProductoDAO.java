@@ -209,12 +209,6 @@ public class ProductoDAO implements IProductoDAO {
 
             int filasAfectadas = ps.executeUpdate();
 
-            if (filasAfectadas == 1) {
-                System.out.println("✅ Producto actualizado correctamente.");
-            } else {
-                System.out.println("❌ No se actualizó el producto. Filas afectadas: " + filasAfectadas);
-            }
-
         } catch (SQLException e) {
             System.out.println("❌ Error al actualizar: " + e.getMessage());
         }

@@ -1,6 +1,5 @@
 package com.inventario.dao;
 
-import com.inventario.models.Proveedor;
 import com.inventario.models.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,7 @@ public class UsuarioDAO {
                         rs.getString("username"),
                         rs.getString("password"),
                         rs.getString("nombre"),
-                        rs.getString("password"),
+                        rs.getString("apellido"),
                         rs.getInt("id_rol")
                 );
                 usuarios.add(usuario);

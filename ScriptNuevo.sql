@@ -22,23 +22,6 @@ INNER JOIN
 INNER JOIN 
 	tb_area d ON a.cod_area = d.id_area
 INNER JOIN 
-	tb_categoria e ON a.id_categoria = e.id_categoria
-order by a.id_producto asc;
-
-select * from tb_productos;
-
-Update tb_productos
-set descripcion_producto = "Teclado",
-	und_medida = "-",
-	fecha_recepcion = "2025-04-15",
-    fecha_salida = "2025-04-16",
-	cantidad_producto = 2,
-    cod_marca = 2,
-    cod_proveedor = 2,
-    cod_area = 2, 
-    id_categoria = 1
-where id_producto = 2;
-
-select * from tb_usuarios;
-INSERT INTO tb_proveedor (descripcion_proveedor) values ("Aliexpress")
+	tb_categoria e ON a.id_categoria = e.id_categoria;
     
+UPDATE tb_proveedor (descripcion_proveedor) WHERE id_proveedor=?

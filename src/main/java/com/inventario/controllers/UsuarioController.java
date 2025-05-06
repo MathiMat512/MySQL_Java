@@ -36,6 +36,7 @@ public class UsuarioController extends HttpServlet{
         usuarioDAO = new UsuarioDAO();
     }
     
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         List<Usuario> listarUsuarios = usuarioDAO.listarUsuarios();
