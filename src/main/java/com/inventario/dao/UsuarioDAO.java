@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,4 +44,22 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+
+    public int totalUsuarios() {
+        String consulta = "Select count(username) as Usuarios_totales from tb_usuarios";
+        int totalUsuarios = 0;
+
+        try (Connection conexion = MySQLConnection.conectarMySQL()) {
+            Statement stm = conexion.createStatement();
+            ResultSet rs = stm.executeQuery(consulta);
+            if (rs.next()) {
+                totalUsuarios = rs.getInt("Usuarios_totales");
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+        return totalUsuarios;
+    }
+
 }

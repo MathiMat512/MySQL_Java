@@ -42,6 +42,9 @@ public class UsuarioController extends HttpServlet{
         List<Usuario> listarUsuarios = usuarioDAO.listarUsuarios();
         request.setAttribute("usuarios", listarUsuarios);
         
+        int totalUsuarios = usuarioDAO.totalUsuarios();
+        request.setAttribute("Usuarios_totales", totalUsuarios);
+        
         request.getRequestDispatcher("usuarios.jsp").forward(request, response);
     }
     

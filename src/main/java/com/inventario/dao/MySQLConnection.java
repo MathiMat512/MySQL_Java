@@ -10,7 +10,7 @@ public class MySQLConnection {
     public static final String port = "3306";
     public static final String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false&serverTimezone=UTC";
     public static final String username = "root";
-    public static final String password = "mathias123";
+    public static final String password = "D3v3l0p3r@@$";
 
     public static Connection conectarMySQL() {
         Connection conn = null;

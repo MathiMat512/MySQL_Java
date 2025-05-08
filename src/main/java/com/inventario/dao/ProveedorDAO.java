@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,25 @@ public class ProveedorDAO {
             e.getMessage();
         }
         return proveedores;
+    }
+    
+    public int totalProveedores(){
+        String consulta = "Select count(descripcion_proveedor) as Proveedores_Totales from tb_proveedor where estado_proveedor=1;";
+        int totalProveedores = 0;
+        
+        try (Connection conexion = MySQLConnection.conectarMySQL()) {
+            Statement stm = conexion.createStatement();
+            ResultSet rs = stm.executeQuery(consulta);
+
+            if (rs.next()) {
+                totalProveedores = rs.getInt("Proveedores_Totales");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return totalProveedores;
     }
 
     public void guardarProveedor(Proveedor proveedor) {

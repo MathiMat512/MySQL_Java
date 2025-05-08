@@ -37,6 +37,9 @@ public class ProveedorController extends HttpServlet {
         List<Proveedor> listarProveedores = proveedorDAO.listarProveedores();
         request.setAttribute("proveedores", listarProveedores);
         
+        int totalProveedores = proveedorDAO.totalProveedores();
+        request.setAttribute("Proveedores_Totales", totalProveedores);
+        
         request.getRequestDispatcher("proveedores.jsp").forward(request, response);
     }
     

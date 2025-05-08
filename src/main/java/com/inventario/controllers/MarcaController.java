@@ -26,6 +26,6 @@ public class MarcaController extends HttpServlet {
         List<Marca> listarMarcas = marcaDAO.listarMarcas();
         request.setAttribute("marcas", listarMarcas);
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("marcas.jsp").forward(request, response);
     }
 }

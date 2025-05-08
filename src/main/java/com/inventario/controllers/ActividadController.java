@@ -7,12 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/categorias")
-public class CategoriaController extends HttpServlet{
+@WebServlet("/actividades")
+public class ActividadController extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         
-        request.getRequestDispatcher("categorias.jsp").forward(request, response);
+        request.getRequestDispatcher("actividades.jsp").forward(request, response);
     }
 }

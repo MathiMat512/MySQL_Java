@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Proveedores</title>
+        <title>Categorias</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="styles.css" rel="stylesheet">
@@ -34,12 +34,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/categorias">
+                                <a class="nav-link active" href="#">
                                     <i class="bi bi-list-check"></i> Categorias
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/proveedores">
                                     <i class="bi bi-truck"></i> Proveedores
                                 </a>
                             </li>
@@ -70,17 +70,9 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-truck text-primary"></i> Gestión de Proveedores
+                            <i class="bi bi-truck text-primary"></i> Categorias registradas
                         </h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
-                            <div class="btn-group me-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi bi-printer"></i> Imprimir
-                                </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
-                            </div>
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-circle"></i> Nuevo Proveedor
                             </button>
@@ -105,22 +97,6 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-3">
-                            <div class="card bg-primary text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="card-title">Proveedores Totales</h6>
-                                            <h2 class="mb-0"><%= request.getAttribute("Proveedores_Totales")%></h2>
-                                        </div>
-                                        <i class="bi bi-check-circle-fill fs-1"></i>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -220,21 +196,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            <!-- Pagination -->
-                            <nav aria-label="Page navigation" class="mt-4">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Siguiente</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </main>

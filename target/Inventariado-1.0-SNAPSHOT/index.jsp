@@ -25,7 +25,7 @@
                         <hr class="bg-light">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/dashboard">
                                     <i class="bi bi-speedometer2"></i> Dashboard
                                 </a>
                             </li>
@@ -35,7 +35,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/categorias">
                                     <i class="bi bi-list-check"></i> Categorias
                                 </a>
                             </li>
@@ -45,17 +45,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/marcas">
                                     <i class="bi bi-cart-check"></i> Marcas
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/areas">
                                     <i class="bi bi-grid-fill"></i> Áreas
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/actividades">
                                     <i class="bi bi-graph-up"></i> Actividades
                                 </a>
                             </li>
