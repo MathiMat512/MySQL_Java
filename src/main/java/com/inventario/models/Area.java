@@ -8,6 +8,10 @@ public class Area {
         this.id_area = id_area;
         this.descripcion_area = descripcion_area;
     }
+    
+    public Area(String descripcion_area){
+        this.descripcion_area = descripcion_area;
+    }
 
     public Integer getId_area() {
         return id_area;

@@ -27,6 +27,9 @@ where estado_producto=1
 order by a.id_producto;
 
 
+select * from tb_categoria;
+
+
 Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado_producto=1;
 
 Select count(cantidad_producto) as Productos_Registrados from tb_productos where estado_producto=1;

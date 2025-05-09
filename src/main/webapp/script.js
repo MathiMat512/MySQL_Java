@@ -38,6 +38,16 @@ function seleccionarCategoriaEdit(categoria, codCategoria, idProducto) {
     document.getElementById(`categoriaDropdownButton_${idProducto}`).textContent = categoria;
 }
 
+function seleccionarRolAdd(rol, codRol) {
+    document.getElementById("cod_rol_add").value = codRol;
+    document.getElementById("rolDropdownButtonAdd").textContent = rol;
+}
+
+function seleccionarRolEdit(rol, codRol, idProducto) {
+    document.getElementById(`cod_rol_${idProducto}`).value = codRol;
+    document.getElementById(`rolDropdownButton_${idProducto}`).textContent = rol;
+}
+
 function eliminarProducto(id) {
     if (confirm('¿Estás seguro de eliminar el producto con ID ' + id + '?')) {
         fetch('productos?id_producto=' + id, {

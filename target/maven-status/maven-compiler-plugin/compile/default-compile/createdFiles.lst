@@ -5,6 +5,7 @@ com\inventario\dao\ProveedorDAO.class
 com\inventario\dao\IProductoDAO.class
 com\inventario\dao\UsuarioDAO.class
 com\inventario\controllers\MarcaController.class
+com\inventario\models\Rol.class
 com\inventario\controllers\ProductoController.class
 com\inventario\dao\AreaDAO.class
 com\inventario\dao\CategoriaDAO.class

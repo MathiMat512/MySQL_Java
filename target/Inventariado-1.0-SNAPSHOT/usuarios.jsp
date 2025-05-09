@@ -1,3 +1,4 @@
+<%@page import="com.inventario.models.Rol"%>
 <%@page import="com.inventario.models.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="com.inventario.models.Categoria"%>
@@ -100,7 +101,25 @@
                                                 <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Nombres" required>
                                                 <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Apellido" required>
                                                 <input type="password" class="form-control mb-3" name="descripcion_proveedor" placeholder="Contraseña" required>
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Rol" required>
+                                                <label>Rol</label>
+                                                <div class="dropdown mb-3 w-100">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle w-100" id="rolDropdownButtonAdd" data-bs-toggle="dropdown">
+                                                        Rol
+                                                    </button>
+                                                    <ul class="dropdown-menu w-100">
+                                                        <%
+                                                            List<Rol> roles = (List<Rol>) request.getAttribute("roles");
+                                                            if (roles != null) {
+                                                                for (Rol rol : roles) {
+                                                        %>
+                                                        <li><a class="dropdown-item" href="#" onclick="seleccionarRolAdd('<%= rol.getDescripcion_rol()%>', '<%= rol.getId_rol()%>', this)"><%= rol.getDescripcion_rol()%></a></li>
+                                                            <%
+                                                                    }
+                                                                }
+                                                            %>
+                                                    </ul>
+                                                    <input type="hidden" id="cod_rol_add" name="cod_rol" value="" required>
+                                                </div>
                                                 
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                                 <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
@@ -185,6 +204,12 @@
                                                                     <input type="hidden" name="accion" value="actualizar">
                                                                     <h6>Descripción</h6>
                                                                     <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getUsername()%>">
+                                                                    <h6>Nombres</h6>
+                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getNombre()%>">
+                                                                    <h6>Apellidos</h6>
+                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getApellido()%>">
+                                                                    <h6>Rol</h6>
+                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getDescripcion()%>">
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

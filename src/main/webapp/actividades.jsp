@@ -70,39 +70,13 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-truck text-primary"></i> Registro de Actividades por los usuarios
+                            <i class="bi bi-graph-up text-primary"></i> Registro de Actividades por los usuarios
                         </h1>
-                        <div class="btn-toolbar mb-2 mb-md-0">
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="bi bi-plus-circle"></i> Nuevo Proveedor
-                            </button>
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo proveedor</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
-                                                
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Listado de Proveedores</h5>
+                            <h5 class="mb-0">Historial de Actividades y últimos cambios hechos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
                                 <input type="text" class="form-control" placeholder="Buscar producto...">
@@ -113,9 +87,11 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID proveedor</th>
-                                            <th>Proveedor</th>
-                                            <th>Acciones</th>
+                                            <th>Código</th>
+                                            <th>Descripcion</th>
+                                            <th>Fecha</th>
+                                            <th>Usuario</th>
+                                            <th>Producto</th>
                                         </tr>
                                     </thead>
                                     <tbody>

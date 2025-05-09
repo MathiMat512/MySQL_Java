@@ -95,6 +95,7 @@
                                         <div class="modal-body">
 
                                             <form id="formAgregarProveedor" action="proveedores" method="POST">
+                                                <input type="hidden" name="accion" value="crear">
                                                 <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
                                                 
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

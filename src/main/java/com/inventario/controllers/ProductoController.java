@@ -108,16 +108,6 @@ public class ProductoController extends HttpServlet {
         response.sendRedirect("productos");
     }
 
-    @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     private Date parseDateOrDefault(String value, Date defaultValue) {
         try {
             return (value != null && !value.trim().isEmpty()) ? Date.valueOf(value) : defaultValue;

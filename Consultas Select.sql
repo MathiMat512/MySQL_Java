@@ -9,4 +9,8 @@ select * from tb_proveedor;
 select * from tb_area;
 select * from tb_categoria;
 
-select * from tb_proveedor where estado_proveedor = 1
+select * from tb_proveedor where estado_proveedor = 1;
+
+UPDATE tb_categoria SET estado_categoria = 0 where id_categoria = 5;
+
+UPDATE tb_proveedor SET estado_proveedor = 0 where id_proveedor = 4

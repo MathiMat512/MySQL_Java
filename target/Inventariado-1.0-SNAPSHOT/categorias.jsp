@@ -70,27 +70,28 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-truck text-primary"></i> Categorias registradas
+                            <i class="bi bi-list-check text-primary"></i> Categorias registradas
                         </h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="bi bi-plus-circle"></i> Nuevo Proveedor
+                                <i class="bi bi-plus-circle"></i> Nueva Categoria
                             </button>
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo proveedor</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nueva categoria</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
 
-                                            <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
+                                            <form id="formAgregarCategoria" action="categorias" method="POST">
+                                                <input type="hidden" name="accion" value="crear">
+                                                <input type="text" class="form-control mb-3" name="descripcion_categoria" placeholder="Categoria" required>
                                                 
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
+                                                <button type="submit" class="btn btn-primary" form="formAgregarCategoria">Guardar cambios</button>
                                             </form>
                                         </div>
                                     </div>
@@ -102,10 +103,10 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Listado de Proveedores</h5>
+                            <h5 class="mb-0">Listado de Categorias</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
+                                <input type="text" class="form-control" placeholder="Buscar categoria...">
                             </div>
                         </div>
                         <div class="card-body">
@@ -113,47 +114,47 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID proveedor</th>
-                                            <th>Proveedor</th>
+                                            <th>ID categoria</th>
+                                            <th>Descripción</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-                                            List<Proveedor> proveedores = (List<Proveedor>) request.getAttribute("proveedores");
-                                            if (proveedores != null) {
-                                                for (Proveedor proveedor : proveedores) {
+                                            List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+                                            if (categorias != null) {
+                                                for (Categoria categoria : categorias) {
                                         %>
                                         <tr>
-                                            <td><%= proveedor.getId_proveedor()%></td>
+                                            <td><%= categoria.getId_categoria()%></td>
                                             <td>
-                                                <strong><%= proveedor.getDescripcion_proveedor()%></strong>
+                                                <strong><%= categoria.getDescripcion_categoria()%></strong>
                                             </td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProveedor<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarCategoria<%= categoria.getId_categoria()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProveedor<%= proveedor.getId_proveedor()%>">
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarCategoria<%= categoria.getId_categoria()%>">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
-                                                <div class="modal fade" id="EditarProveedor<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EditarCategoria<%= categoria.getId_categoria()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar proveedor</h1>
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar categoria</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form id="formEditarProveedor_<%= proveedor.getId_proveedor()%>" action="proveedores" method="POST">
+                                                            <form id="formEditarCategoria_<%= categoria.getId_categoria()%>" action="categorias" method="POST">
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="id_proveedor" value="<%= proveedor.getId_proveedor()%>">
-                                                                    <input type="hidden" name="accion" value="actualizar">
+                                                                    <input type="hidden" name="id_categoria" value="<%= categoria.getId_categoria()%>">
+                                                                    <input type="hidden" name="accion" value="editar">
                                                                     <h6>Descripción</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_proveedor" value="<%= proveedor.getDescripcion_proveedor()%>">
+                                                                    <input class="form-control mb-2" name="descripcion_categoria" value="<%= categoria.getDescripcion_categoria()%>">
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formEditarProveedor_<%= proveedor.getId_proveedor()%>">Guardar cambios</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formEditarCategoria_<%= categoria.getId_categoria()%>">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -161,18 +162,18 @@
                                                     </div>
                                                 </div> 
 
-                                                <div class="modal fade" id="EliminarProveedor<%= proveedor.getId_proveedor()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EliminarCategoria<%= categoria.getId_categoria()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                        <form action="proveedores" method="POST">
-                                                            <input type="hidden" name="id_proveedor" value="<%= proveedor.getId_proveedor()%>">
+                                                        <form action="categorias" method="POST">
+                                                            <input type="hidden" name="id_categoria" value="<%= categoria.getId_categoria()%>">
                                                             <input type="hidden" name="accion" value="eliminar">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar proveedor</h1>
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar categoria</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    ¿Estás seguro que deseas eliminar el proveedor <strong><%=proveedor.getDescripcion_proveedor()%></strong> con ID <strong><%=proveedor.getId_proveedor()%></strong>?
+                                                                    ¿Estás seguro que deseas eliminar la categoria <strong><%=categoria.getDescripcion_categoria()%></strong> con ID <strong><%=categoria.getId_categoria()%></strong>?
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

@@ -1,8 +1,4 @@
 package com.inventario.controllers;
-import com.inventario.dao.AreaDAO;
-import com.inventario.dao.CategoriaDAO;
-import com.inventario.dao.MarcaDAO;
-import com.inventario.dao.ProductoDAO;
 import com.inventario.dao.ProveedorDAO;
 import com.inventario.models.Proveedor;
 import jakarta.servlet.ServletException;
@@ -17,19 +13,11 @@ import java.util.List;
 public class ProveedorController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private ProductoDAO productoDAO;
-    private MarcaDAO marcaDAO;
-    private AreaDAO areaDAO;
     private ProveedorDAO proveedorDAO;
-    private CategoriaDAO categoriaDAO;
     
     @Override
     public void init() throws ServletException {
-        productoDAO = new ProductoDAO();
-        marcaDAO = new MarcaDAO();
-        areaDAO = new AreaDAO();
         proveedorDAO = new ProveedorDAO();
-        categoriaDAO = new CategoriaDAO();
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,27 +39,22 @@ public class ProveedorController extends HttpServlet {
         String descripcion_proveedor = request.getParameter("descripcion_proveedor");
         Proveedor proveedor = new Proveedor(descripcion_proveedor);
         
-        if ("eliminar".equals(accion)) {
-            if (id_proveedor != null && !id_proveedor.isEmpty()) {
+        switch (accion) {
+            case "crear":{
+                proveedorDAO.guardarProveedor(proveedor);
+                break;
+            }
+            case "actualizar":{
+                proveedor.setId_proveedor(Integer.valueOf(id_proveedor));
+                proveedorDAO.editarProveedor(proveedor);
+                break;
+            }
+            case "eliminar":{
                 proveedor.setId_proveedor(Integer.valueOf(id_proveedor));
                 proveedorDAO.eliminarProveedor(proveedor);
-            } else {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del producto es necesario para eliminar.");
-                return;
+                break;
             }
-            response.sendRedirect("proveedores");
-            return;
         }
-        
-        if (id_proveedor != null && !id_proveedor.isEmpty()) {
-            // Si hay un ID, es una actualización
-            proveedor.setId_proveedor(Integer.valueOf(id_proveedor));
-            proveedorDAO.editarProveedor(proveedor); // <<-- LLAMAR AL MÉTODO DE ACTUALIZACIÓN
-        } else {
-            // Si no hay ID, es un nuevo producto
-            proveedorDAO.guardarProveedor(proveedor); // <<-- CREAR NUEVO
-        }
-        
         response.sendRedirect("proveedores");
     }
 }

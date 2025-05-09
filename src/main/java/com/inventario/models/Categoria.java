@@ -9,6 +9,10 @@ public class Categoria {
         this.descripcion_categoria = descripcion_categoria;
     }
 
+    public Categoria(String descripcion_categoria) {
+        this.descripcion_categoria = descripcion_categoria;
+    }
+
     public Integer getId_categoria() {
         return id_categoria;
     }

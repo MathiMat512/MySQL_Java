@@ -90,7 +90,7 @@ public class ProveedorDAO {
                 PreparedStatement ps = conexion.prepareStatement(consulta)){
             
             ps.setInt(1, proveedor.getId_proveedor());
-            ps.executeQuery();
+            ps.executeUpdate();
             
         } catch(SQLException e){
             e.printStackTrace();

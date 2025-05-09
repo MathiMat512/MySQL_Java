@@ -8,6 +8,10 @@ public class Marca {
         this.id_marca = id_marca;
         this.descripcion_marca = descripcion_marca;
     }
+    
+    public Marca(String descripcion_marca){
+        this.descripcion_marca = descripcion_marca;
+    }
 
     public Integer getId_marca() {
         return id_marca;

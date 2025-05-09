@@ -70,27 +70,28 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-truck text-primary"></i> Marcas Registradas
+                            <i class="bi bi-cart-check text-primary"></i> Marcas Registradas
                         </h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="bi bi-plus-circle"></i> Nuevo Proveedor
+                                <i class="bi bi-plus-circle"></i> Nueva marca
                             </button>
 
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo proveedor</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nueva marca</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
 
-                                            <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
-                                                
+                                            <form id="formAgregarMarca" action="marcas" method="POST">
+                                                <input type="hidden" name="accion" value="crear">
+                                                <input type="text" class="form-control mb-3" name="descripcion_marca" placeholder="Marca" required>
+
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
+                                                <button type="submit" class="btn btn-primary" form="formAgregarMarca">Guardar cambios</button>
                                             </form>
                                         </div>
                                     </div>
@@ -102,10 +103,10 @@
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Listado de Proveedores</h5>
+                            <h5 class="mb-0">Listado de Marcas de productos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
+                                <input type="text" class="form-control" placeholder="Buscar marca...">
                             </div>
                         </div>
                         <div class="card-body">
@@ -113,13 +114,86 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ID proveedor</th>
-                                            <th>Proveedor</th>
+                                            <th>ID marca</th>
+                                            <th>Descripción</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <%
+                                            List<Marca> marcas = (List<Marca>) request.getAttribute("marcas");
+                                            if (marcas != null) {
+                                                for (Marca marca : marcas) {
+                                        %>
+                                        <tr>
+                                            <td><%= marca.getId_marca()%></td>
+                                            <td>
+                                                <strong><%= marca.getDescripcion_marca()%></strong>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarMarca<%= marca.getId_marca()%>">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarMarca<%= marca.getId_marca()%>">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+                                                <div class="modal fade" id="EditarMarca<%= marca.getId_marca()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar marca</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form id="formEditarMarca_<%= marca.getId_marca()%>" action="marcas" method="POST">
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="id_marca" value="<%= marca.getId_marca()%>">
+                                                                    <input type="hidden" name="accion" value="editar">
+                                                                    <h6>Descripción</h6>
+                                                                    <input class="form-control mb-2" name="descripcion_marca" value="<%= marca.getDescripcion_marca()%>">
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formEditarMarca_<%= marca.getId_marca()%>">Guardar cambios</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+
+                                                <div class="modal fade" id="EliminarMarca<%= marca.getId_marca()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="marcas" method="POST">
+                                                            <input type="hidden" name="id_marca" value="<%= marca.getId_marca()%>">
+                                                            <input type="hidden" name="accion" value="eliminar">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar marca</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ¿Estás seguro que deseas eliminar la marca <strong><%=marca.getDescripcion_marca()%></strong> con ID <strong><%=marca.getId_marca()%></strong>?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        } else {
+                                        %>
+                                        <tr>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
                                     </tbody>
                                 </table>
                             </div>
