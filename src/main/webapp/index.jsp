@@ -96,6 +96,7 @@
                                         <div class="modal-body">
 
                                             <form id="formAgregarProducto" action="productos" method="POST">
+                                                <input type="hidden" name="accion" value="crear">
                                                 <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Nombre" required>
                                                 <input type="text" class="form-control mb-3" name="und_medida" placeholder="Unidad de medida">
                                                 <label>Fecha de recepción</label>
@@ -285,7 +286,7 @@
                                                                 <form id="formActualizarProducto_<%= producto.getId_producto()%>" action="productos" method="POST">
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="id_producto" value="<%= producto.getId_producto()%>">
-                                                                        <input type="hidden" name="accion" value="actualizar">
+                                                                        <input type="hidden" name="accion" value="editar">
                                                                         <h6>Descripción</h6>
                                                                         <input class="form-control mb-2" name="descripcion_producto" value="<%= producto.getDescripcion_producto()%>">
                                                                         <h6>Unidad de Medida</h6>

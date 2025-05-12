@@ -43,9 +43,9 @@ function seleccionarRolAdd(rol, codRol) {
     document.getElementById("rolDropdownButtonAdd").textContent = rol;
 }
 
-function seleccionarRolEdit(rol, codRol, idProducto) {
-    document.getElementById(`cod_rol_${idProducto}`).value = codRol;
-    document.getElementById(`rolDropdownButton_${idProducto}`).textContent = rol;
+function seleccionarRolEdit(rol, codRol, id_user) {
+    document.getElementById(`cod_rol_${id_user}`).value = codRol;
+    document.getElementById(`rolDropdownButton_${id_user}`).textContent = rol;
 }
 
 function eliminarProducto(id) {

@@ -7,7 +7,7 @@ public class Usuario {
     private String password;
     private String nombre;
     private String apellido;
-    private int id_rol;
+    private Integer id_rol;
     private String descripcion;
 
     public Usuario(Integer id_user, String username, String nombre,
@@ -35,6 +35,14 @@ public class Usuario {
 
     public void setId_User(Integer id_user) {
         this.id_user = id_user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {

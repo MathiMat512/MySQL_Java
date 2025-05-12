@@ -85,7 +85,25 @@ public class ProductoController extends HttpServlet {
         Producto producto = new Producto(descripcion_producto, und_medida, fecha_recepcion, fecha_salida,
                 cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria);
 
-        if ("eliminar".equals(accion)) {
+        switch (accion) {
+            case "crear": {
+                productoDAO.guardarProducto(producto);
+                break;
+            }
+            case "editar": {
+                producto.setId_producto(Integer.valueOf(idProducto));
+                productoDAO.actualizarProducto(producto);
+                break;
+            }
+            case "eliminar": {
+                producto.setId_producto(Integer.valueOf(idProducto));
+                productoDAO.eliminarProducto(producto);
+                break;
+            }
+        }
+        response.sendRedirect("productos");
+
+        /*if ("eliminar".equals(accion)) {
             if (idProducto != null && !idProducto.isEmpty()) {
                 producto.setId_producto(Integer.valueOf(idProducto));
                 productoDAO.eliminarProducto(producto);
@@ -104,8 +122,7 @@ public class ProductoController extends HttpServlet {
         } else {
             // Si no hay ID, es un nuevo producto
             productoDAO.guardarProducto(producto); // <<-- CREAR NUEVO
-        }
-        response.sendRedirect("productos");
+        }*/
     }
 
     private Date parseDateOrDefault(String value, Date defaultValue) {

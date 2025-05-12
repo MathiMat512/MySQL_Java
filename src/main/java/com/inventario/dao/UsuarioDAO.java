@@ -46,7 +46,7 @@ public class UsuarioDAO {
     }
 
     public int totalUsuarios() {
-        String consulta = "Select count(username) as Usuarios_totales from tb_usuarios";
+        String consulta = "Select count(username) as Usuarios_totales from tb_usuarios where estado_usuario=1";
         int totalUsuarios = 0;
 
         try (Connection conexion = MySQLConnection.conectarMySQL()) {
@@ -62,33 +62,65 @@ public class UsuarioDAO {
         return totalUsuarios;
     }
 
-    public List<Rol> listarRoles(){
+    public List<Rol> listarRoles() {
         List<Rol> roles = new ArrayList<>();
-        
+
         String consulta = "Select * from tb_roles";
         try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement stmt = conn.prepareStatement(consulta); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Rol rol = new Rol(
-                    rs.getString("descripcion_rol")
+                        rs.getInt("id_rol"),
+                        rs.getString("descripcion_rol")
                 );
                 roles.add(rol);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return roles;
     }
-    
-    public void crearUsuario(){
-        String consulta = "";
+
+    public void crearUsuario(Usuario usuario) {
+        String consulta = "INSERT INTO tb_usuarios (username, password, nombre, apellido, "
+                + "id_rol, estado_usuario) VALUES (?,?,?,?,?,1)";
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+            ps.setString(1, usuario.getUsername());
+            ps.setString(2, usuario.getPassword());
+            ps.setString(3, usuario.getNombre());
+            ps.setString(4, usuario.getApellido());
+            ps.setInt(5, usuario.getId_rol());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    public void editarUsuario(){
-        String consulta = "";
+
+    public void editarUsuario(Usuario usuario) {
+        String consulta = "UPDATE tb_usuarios SET username=?, nombre=?, "
+                + "apellido=?, id_rol=? where id_user=?";
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+            ps.setString(1, usuario.getUsername());
+            ps.setString(2, usuario.getNombre());
+            ps.setString(3, usuario.getApellido());
+            ps.setInt(4, usuario.getId_rol());
+            ps.setInt(5, usuario.getId_User());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    public void eliminarUsuario(){
-        String consulta = "";
+
+    public void eliminarUsuario(Usuario usuario) {
+        String consulta = "UPDATE tb_usuarios SET estado_usuario=0 where id_user=?";
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+            ps.setInt(1, usuario.getId_User());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

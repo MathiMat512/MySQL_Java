@@ -96,11 +96,12 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Nombre de usuario" required>
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Nombres" required>
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Apellido" required>
-                                                <input type="password" class="form-control mb-3" name="descripcion_proveedor" placeholder="Contraseña" required>
+                                            <form id="formAgregarUsuario" action="usuarios" method="POST">
+                                                <input type="hidden" name="accion" value="crear">
+                                                <input type="text" class="form-control mb-3" name="username" placeholder="Nombre de usuario" required>
+                                                <input type="password" class="form-control mb-3" name="password" placeholder="Contraseña" required>
+                                                <input type="text" class="form-control mb-3" name="nombre" placeholder="Nombres" required>
+                                                <input type="text" class="form-control mb-3" name="apellido" placeholder="Apellido" required>
                                                 <label>Rol</label>
                                                 <div class="dropdown mb-3 w-100">
                                                     <button type="button" class="btn btn-primary dropdown-toggle w-100" id="rolDropdownButtonAdd" data-bs-toggle="dropdown">
@@ -118,11 +119,11 @@
                                                                 }
                                                             %>
                                                     </ul>
-                                                    <input type="hidden" id="cod_rol_add" name="cod_rol" value="" required>
+                                                    <input type="hidden" id="cod_rol_add" name="id_rol" value="" required>
                                                 </div>
-                                                
+
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
+                                                <button type="submit" class="btn btn-primary" form="formAgregarUsuario">Guardar cambios</button>
                                             </form>
                                         </div>
                                     </div>
@@ -145,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
 
                     <div class="card">
@@ -176,7 +177,7 @@
                                                 for (Usuario usuario : usuarios) {
                                         %>
                                         <tr>
-                                            <td><%= usuario.getId_usuario()%></td>
+                                            <td><%= usuario.getId_User()%></td>
                                             <td>
                                                 <strong><%= usuario.getUsername()%></strong>
                                             </td>
@@ -184,36 +185,52 @@
                                             <td><%= usuario.getApellido()%></td>
                                             <td><%= usuario.getDescripcion()%></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarProducto<%= usuario.getId_usuario()%>">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#EditarUsuario<%= usuario.getId_User()%>">
                                                     <i class="bi bi-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarProducto<%= usuario.getId_usuario()%>">
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#EliminarUsuario<%= usuario.getId_User()%>">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
 
-                                                <div class="modal fade" id="EditarProducto<%= usuario.getId_usuario()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EditarUsuario<%= usuario.getId_User()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Editar usuario</h1>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
-                                                            <form id="formActualizarProducto_<%= usuario.getId_usuario()%>" action="productos" method="POST">
+                                                            <form id="formEditarUsuario_<%= usuario.getId_User()%>" action="usuarios" method="POST">
                                                                 <div class="modal-body">
-                                                                    <input type="hidden" name="id_producto" value="<%= usuario.getId_usuario()%>">
-                                                                    <input type="hidden" name="accion" value="actualizar">
-                                                                    <h6>Descripción</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getUsername()%>">
+                                                                    <input type="hidden" name="id_user" value="<%= usuario.getId_User()%>">
+                                                                    <input type="hidden" name="accion" value="editar">
+                                                                    <h6>Nombre de Usuario</h6>
+                                                                    <input class="form-control mb-2" name="username" value="<%= usuario.getUsername()%>">
                                                                     <h6>Nombres</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getNombre()%>">
+                                                                    <input class="form-control mb-2" name="nombre" value="<%= usuario.getNombre()%>">
                                                                     <h6>Apellidos</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getApellido()%>">
-                                                                    <h6>Rol</h6>
-                                                                    <input class="form-control mb-2" name="descripcion_producto" value="<%= usuario.getDescripcion()%>">
+                                                                    <input class="form-control mb-2" name="apellido" value="<%= usuario.getApellido()%>">
+                                                                    <label>Rol</label>
+                                                                    <div class="dropdown mb-3 w-100">
+                                                                        <button type="button" class="btn btn-primary dropdown-toggle w-100" 
+                                                                                id="rolDropdownButton_<%= usuario.getId_User()%>" data-bs-toggle="dropdown">
+                                                                            <%= usuario.getDescripcion()%>
+                                                                        </button>
+
+                                                                        <ul class="dropdown-menu w-100">
+                                                                            <% for (Rol rol : roles) {%>
+                                                                            <li><a class="dropdown-item" href="#" 
+                                                                                   onclick="seleccionarRolEdit('<%= rol.getDescripcion_rol()%>', '<%= rol.getId_rol()%>', <%= usuario.getId_User()%>)">
+                                                                                    <%= rol.getDescripcion_rol()%>
+                                                                                </a></li>
+                                                                                <% }%>
+                                                                        </ul>
+                                                                        <input type="hidden" id="cod_rol_<%= usuario.getId_User()%>" name="id_rol" value="<%= usuario.getId_rol()%>" required>
+
+                                                                    </div>
 
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                                        <button type="submit" class="btn btn-primary" form="formActualizarProducto_<%= usuario.getId_usuario()%>">Guardar cambios</button>
+                                                                        <button type="submit" class="btn btn-primary" form="formEditarUsuario_<%= usuario.getId_User()%>">Guardar cambios</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -221,10 +238,10 @@
                                                     </div>
                                                 </div> 
 
-                                                <div class="modal fade" id="EliminarProducto<%= usuario.getId_usuario()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="EliminarUsuario<%= usuario.getId_User()%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
-                                                        <form action="productos" method="POST">
-                                                            <input type="hidden" name="id_producto" value="<%= usuario.getId_usuario()%>">
+                                                        <form action="usuarios" method="POST">
+                                                            <input type="hidden" name="id_user" value="<%= usuario.getId_User()%>">
                                                             <input type="hidden" name="accion" value="eliminar">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -232,7 +249,7 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    ¿Estás seguro que deseas eliminar el usuario <strong><%=usuario.getUsername()%></strong> con ID <strong><%=usuario.getId_usuario()%></strong>?
+                                                                    ¿Estás seguro que deseas eliminar el usuario <strong><%=usuario.getUsername()%></strong> con ID <strong><%=usuario.getId_User()%></strong>?
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

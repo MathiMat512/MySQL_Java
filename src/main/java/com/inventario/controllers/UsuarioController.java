@@ -40,7 +40,6 @@ public class UsuarioController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String accion = request.getParameter("accion");
 
         String id_user = request.getParameter("id_user");
@@ -51,6 +50,24 @@ public class UsuarioController extends HttpServlet {
         Integer id_rol = parseIntegerOrDefault(request.getParameter("id_rol"), null);
         
         Usuario usuario = new Usuario(username,password,nombre,apellido,id_rol);
+        
+        switch (accion) {
+            case "crear":{
+                usuarioDAO.crearUsuario(usuario);
+                break;
+            }
+            case "editar":{
+                usuario.setId_User(Integer.valueOf(id_user));
+                usuarioDAO.editarUsuario(usuario);
+                break;
+            }
+            case "eliminar":{
+                usuario.setId_User(Integer.valueOf(id_user));
+                usuarioDAO.eliminarUsuario(usuario);
+                break;
+            }
+        }
+        response.sendRedirect("usuarios");
     }
     
     private Date parseDateOrDefault(String value, Date defaultValue) {
