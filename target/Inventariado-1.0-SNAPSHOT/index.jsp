@@ -228,7 +228,8 @@
                             <h5 class="mb-0">Listado de Productos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
+                                <input type="text" id="buscar" class="form-control" 
+                                placeholder="Buscar producto..." onkeyup="filtrarBusqueda()">
                             </div>
                         </div>
                         <div class="card-body">
@@ -434,6 +435,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="script.js"></script>
+        <script src="Javascript/script.js"></script>
+        <script src="Javascript/buscar.js"></script>
     </body>
 </html>

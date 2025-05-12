@@ -73,52 +73,105 @@
                             <i class="bi bi-speedometer2 text-primary"></i> Dashboard Principal
                         </h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo proveedor</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <form id="formAgregarProveedor" action="proveedores" method="POST">
-                                                <input type="text" class="form-control mb-3" name="descripcion_proveedor" placeholder="Proveedor" required>
-                                                
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary" form="formAgregarProveedor">Guardar cambios</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Listado de Proveedores</h5>
-                            <div class="search-box">
-                                <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
-                            </div>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID proveedor</th>
-                                            <th>Proveedor</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                    </tbody>
-                                </table>
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <div class="card bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Productos Registrados</h6>
+                                                        <h2 class="mb-0"><%= request.getAttribute("Total_Cantidades")%></h2>
+                                                    </div>
+                                                    <i class="bi bi-cart4 fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-success text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Categorias Totales</h6>
+                                                        <h2 class="mb-0"><%= request.getAttribute("Productos_Registrados")%></h2>
+                                                    </div>
+                                                    <i class="bi bi-list-check fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-warning text-dark">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Proveedores Totales</h6>
+                                                        <h2 class="mb-0">212</h2>
+                                                    </div>
+                                                    <i class="bi bi-truck fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-info text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Marcas Totales</h6>
+                                                        <h2 class="mb-0">134</h2>
+                                                    </div>
+                                                    <i class="bi bi-cart-check fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Áreas Totales</h6>
+                                                        <h2 class="mb-0">134</h2>
+                                                    </div>
+                                                    <i class="bi bi-grid-fill fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-secondary text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Usuarios Totales</h6>
+                                                        <h2 class="mb-0">134</h2>
+                                                    </div>
+                                                    <i class="bi bi-person-circle fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="card-title">Última Actividad</h6>
+                                                        <h2 class="mb-0"><%= request.getAttribute("Total_Cantidades")%></h2>
+                                                    </div>
+                                                    <i class="bi bi-clock-history fs-1"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -126,6 +179,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="script.js"></script>
+        <script src="Javascript/script.js"></script>
+        <script src="Javascript/buscar.js"></script>
     </body>
 </html>

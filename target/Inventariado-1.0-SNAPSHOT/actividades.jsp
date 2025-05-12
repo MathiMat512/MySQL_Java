@@ -89,9 +89,9 @@
                                         <tr>
                                             <th>Código</th>
                                             <th>Descripcion</th>
-                                            <th>Fecha</th>
+                                            <th>Fecha y hora</th>
                                             <th>Usuario</th>
-                                            <th>Producto</th>
+                                            <th>Tabla afectada</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -105,6 +105,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="script.js"></script>
+        <script src="Javascript/script.js"></script>
+        <script src="Javascript/buscar.js"></script>
     </body>
 </html>
