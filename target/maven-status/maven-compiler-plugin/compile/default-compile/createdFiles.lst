@@ -4,6 +4,7 @@ com\inventario\dao\ProductoDAO.class
 com\inventario\dao\ProveedorDAO.class
 com\inventario\dao\IProductoDAO.class
 com\inventario\dao\UsuarioDAO.class
+com\inventario\dao\ActividadDAO.class
 com\inventario\controllers\MarcaController.class
 com\inventario\models\Rol.class
 com\inventario\controllers\ProductoController.class
@@ -18,6 +19,7 @@ com\inventario\models\Categoria.class
 com\inventario\models\Marca.class
 com\mycompany\inventariado\resources\JakartaEE11Resource.class
 com\inventario\models\Proveedor.class
+com\inventario\models\Actividad.class
 com\inventario\dao\MarcaDAO.class
 com\mycompany\inventariado\JakartaRestConfiguration.class
 com\inventario\controllers\UsuarioController.class

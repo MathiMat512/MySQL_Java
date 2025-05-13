@@ -102,27 +102,6 @@ public class ProductoController extends HttpServlet {
             }
         }
         response.sendRedirect("productos");
-
-        /*if ("eliminar".equals(accion)) {
-            if (idProducto != null && !idProducto.isEmpty()) {
-                producto.setId_producto(Integer.valueOf(idProducto));
-                productoDAO.eliminarProducto(producto);
-            } else {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del producto es necesario para eliminar.");
-                return;
-            }
-            response.sendRedirect("productos");
-            return;
-        }
-
-        if (idProducto != null && !idProducto.isEmpty()) {
-            // Si hay un ID, es una actualización
-            producto.setId_producto(Integer.valueOf(idProducto));
-            productoDAO.actualizarProducto(producto); // <<-- LLAMAR AL MÉTODO DE ACTUALIZACIÓN
-        } else {
-            // Si no hay ID, es un nuevo producto
-            productoDAO.guardarProducto(producto); // <<-- CREAR NUEVO
-        }*/
     }
 
     private Date parseDateOrDefault(String value, Date defaultValue) {

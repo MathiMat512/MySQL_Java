@@ -1,3 +1,4 @@
+<%@page import="com.inventario.models.Actividad"%>
 <%@page import="java.util.List"%>
 <%@page import="com.inventario.models.Categoria"%>
 <%@page import="com.inventario.models.Proveedor"%>
@@ -79,7 +80,7 @@
                             <h5 class="mb-0">Historial de Actividades y últimos cambios hechos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar producto...">
+                                <input type="text" class="form-control" placeholder="Buscar código...">
                             </div>
                         </div>
                         <div class="card-body">
@@ -91,11 +92,31 @@
                                             <th>Descripcion</th>
                                             <th>Fecha y hora</th>
                                             <th>Usuario</th>
-                                            <th>Tabla afectada</th>
+                                            <th>Producto afectado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <%
+                                            List<Actividad> actividades = (List<Actividad>) request.getAttribute("actividades");
+                                            if (actividades != null) {
+                                                for (Actividad actividad : actividades) {
+                                        %>
+                                        <tr>
+                                            <td><%= actividad.getId_actividad()%></td>
+                                            <td><%= actividad.getDescripcion()%></td>
+                                            <td><%= actividad.getFecha_mov()%></td>
+                                            <td><%= actividad.getUsername()%></td>
+                                            <td><%= actividad.getDescripcion_producto()%></td>
+                                        </tr>
+                                        <%
+                                            }
+                                        } else {
+                                        %>
+                                        <tr>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
                                     </tbody>
                                 </table>
                             </div>

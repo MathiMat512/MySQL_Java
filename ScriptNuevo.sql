@@ -27,7 +27,20 @@ where estado_producto=1
 order by a.id_producto;
 
 
-select * from tb_categoria;
+select 
+	a.id_actividad,
+    a.descripcion,
+    a.fecha_mov,
+    a.id_user,
+    b.username,
+    a.id_producto,
+    c.descripcion_producto
+FROM
+	tb_actividades a
+INNER JOIN
+	tb_usuarios b ON a.id_user = b.id_user
+INNER JOIN
+	tb_productos c ON a.id_producto = c.id_producto;
 
 
 Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado_producto=1;
@@ -35,3 +48,4 @@ Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado
 Select count(cantidad_producto) as Productos_Registrados from tb_productos where estado_producto=1;
 
 UPDATE tb_productos SET estado_producto = 1 WHERE id_producto = 3;
+

@@ -49,7 +49,7 @@ public class ProveedorDAO {
     }
 
     public void guardarProveedor(Proveedor proveedor) {
-        String consulta = "INSERT INTO tb_proveedor (descripcion_proveedor) VALUES (?)";
+        String consulta = "INSERT INTO tb_proveedor (descripcion_proveedor, estado_proveedor) VALUES (?,1)";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
