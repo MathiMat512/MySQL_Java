@@ -413,11 +413,11 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <img src="https://barcode.orcascan.com/?type=code128&data=<%= producto.getCod_marca()%><%= producto.getId_categoria()%><%= producto.getCod_proveedor()%><%= producto.getId_producto()%>&format=png" alt="alt" width="300" height="100"/>
-                                                                <h4><%= producto.getCod_marca()%><%= producto.getId_categoria()%><%= producto.getCod_proveedor()%><%= producto.getId_producto()%></h4>
-                                                                <h4>Marca: <%= producto.getCod_marca()%></h4>
-                                                                <h4>Categoria: <%= producto.getId_categoria()%></h4>
-                                                                <h4>Proveedor: <%= producto.getCod_proveedor()%></h4>
-                                                                <h4>Producto: <%= producto.getId_producto()%></h4>
+                                                                <h5><%= producto.getCod_marca()%><%= producto.getId_categoria()%><%= producto.getCod_proveedor()%><%= producto.getId_producto()%></h5>
+                                                                <h5>Código Marca: <%= producto.getCod_marca()%></h5>
+                                                                <h5>Código Categoria: <%= producto.getId_categoria()%></h5>
+                                                                <h5>Código Proveedor: <%= producto.getCod_proveedor()%></h5>
+                                                                <h5>Código Producto: <%= producto.getId_producto()%></h5>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
