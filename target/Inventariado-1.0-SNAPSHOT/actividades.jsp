@@ -59,6 +59,11 @@
                                     <i class="bi bi-graph-up"></i> Actividades
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/transacciones">
+                                    <i class="bi bi-reception-4"></i> Kárdex
+                                </a>
+                            </li>
                             <li class="nav-item mt-4">
                                 <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/usuarios">
                                     <i class="bi bi-person-circle"></i> Usuarios

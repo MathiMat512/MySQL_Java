@@ -49,8 +49,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/actividades">
                                     <i class="bi bi-graph-up"></i> Actividades
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class="bi bi-reception-4"></i> Kárdex
                                 </a>
                             </li>
                             <li class="nav-item mt-4">
@@ -65,13 +70,13 @@
                 <main class="col-md-9 col-lg-10 main-content">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">
-                            <i class="bi bi-graph-up text-primary"></i> Registro de Actividades por los usuarios
+                            <i class="bi bi-reception-4 text-primary"></i> Sistema de transacciones Kárdex
                         </h1>
                     </div>
 
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Historial de Actividades y últimos cambios hechos</h5>
+                            <h5 class="mb-0">Historial de vida de productos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
                                 <input type="text" class="form-control" placeholder="Buscar código...">
@@ -83,10 +88,13 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Descripcion</th>
-                                            <th>Fecha y hora</th>
-                                            <th>Usuario</th>
-                                            <th>Producto afectado</th>
+                                            <th>Producto</th>
+                                            <th>Fecha del mov.</th>
+                                            <th>Entrada</th>
+                                            <th>Salida</th>
+                                            <th>Cantidad</th>
+                                            <th>Área de origen</th>
+                                            <th>Área de destino</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,7 +107,6 @@
                 </main>
             </div>
         </div>
-        <h1>Hello World!</h1>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
         <script src="Javascript/script.js"></script>
         <script src="Javascript/buscar.js"></script>
