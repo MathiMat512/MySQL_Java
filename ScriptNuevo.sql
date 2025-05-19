@@ -43,6 +43,23 @@ INNER JOIN
 	tb_productos c ON a.id_producto = c.id_producto;
 
 
+
+select * from tb_transacciones;
+
+select
+	a.id_transaccion,
+    a.id_producto,
+    b.descripcion_producto,
+    a.fecha_movimiento,
+    a.tipo_transaccion,
+    a.cantidad,
+    a.cantidad_actual
+FROM 
+	tb_transacciones a
+INNER JOIN
+	tb_productos b ON a.id_producto = b.id_producto;
+
+
 Select sum(cantidad_producto) AS Total_Cantidades from tb_productos where estado_producto=1;
 
 Select count(cantidad_producto) as Productos_Registrados from tb_productos where estado_producto=1;

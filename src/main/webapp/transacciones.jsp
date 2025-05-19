@@ -1,3 +1,5 @@
+<%@page import="com.inventario.models.Transaccion"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -79,7 +81,8 @@
                             <h5 class="mb-0">Historial de vida de productos</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar código...">
+                                <input type="text" id="buscar" class="form-control" 
+                                       placeholder="Buscar producto..." onkeyup="filtrarBusqueda()">
                             </div>
                         </div>
                         <div class="card-body">
@@ -88,17 +91,38 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Producto</th>
-                                            <th>Fecha del mov.</th>
-                                            <th>Entrada</th>
-                                            <th>Salida</th>
+                                            <th>Producto afectado</th>
+                                            <th>Fecha y hora</th>
+                                            <th>Tipo de transacción</th>
                                             <th>Cantidad</th>
-                                            <th>Área de origen</th>
-                                            <th>Área de destino</th>
+                                            <th>Cantidad actual</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <%
+                                            List<Transaccion> transacciones = (List<Transaccion>) request.getAttribute("transacciones");
+                                            if (transacciones != null) {
+                                                for (Transaccion transaccion : transacciones) {
+                                        %>
+                                        <tr>
+                                            <td><%= transaccion.getId_transaccion()%></td>
+                                            <td>
+                                                <strong><%= transaccion.getDescripcion_producto()%></strong>
+                                            </td>
+                                            <td><%= transaccion.getFecha_movimiento()%></td>
+                                            <td><%= transaccion.getTipo_transaccion()%></td>
+                                            <td><%= transaccion.getCantidad()%></td>
+                                            <td><%= transaccion.getCantidad_actual()%></td>
+                                        </tr>
+                                        <%
+                                            }
+                                        } else {
+                                        %>
+                                        <tr>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
                                     </tbody>
                                 </table>
                             </div>
