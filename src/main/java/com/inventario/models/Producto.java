@@ -6,8 +6,6 @@ public class Producto {
     private Integer id_producto;
     private String descripcion_producto;
     private String und_medida;
-    private Date fecha_recepcion;
-    private Date fecha_salida;
     private Integer cantidad_producto;
     private Integer cod_marca;
     private String descripcion_marca;
@@ -18,14 +16,12 @@ public class Producto {
     private Integer id_categoria;
     private String descripcion_categoria;
 
-    public Producto(Integer id_producto, String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida,
-            Integer cantidad_producto, Integer cod_marca, String descripcion_marca, Integer cod_proveedor,
-            String descripcion_proveedor, Integer cod_area, String descripcion_area, Integer id_categoria, String descripcion_categoria) {
+    public Producto(Integer id_producto, String descripcion_producto, String und_medida,Integer cantidad_producto, 
+            Integer cod_marca, String descripcion_marca, Integer cod_proveedor,String descripcion_proveedor, 
+            Integer cod_area, String descripcion_area, Integer id_categoria, String descripcion_categoria) {
         this.id_producto = id_producto;
         this.descripcion_producto = descripcion_producto;
         this.und_medida = und_medida;
-        this.fecha_recepcion = fecha_recepcion;
-        this.fecha_salida = fecha_salida;
         this.cantidad_producto = cantidad_producto;
         this.cod_marca = cod_marca;
         this.descripcion_marca = descripcion_marca;
@@ -37,12 +33,10 @@ public class Producto {
         this.descripcion_categoria = descripcion_categoria;
     }
     
-    public Producto(String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida, Integer cantidad_producto,
+    public Producto(String descripcion_producto, String und_medida, Integer cantidad_producto,
             Integer cod_marca, Integer cod_proveedor, Integer cod_area, Integer id_categoria){
         this.descripcion_producto = descripcion_producto;
         this.und_medida = und_medida;
-        this.fecha_recepcion = fecha_recepcion;
-        this.fecha_salida = fecha_salida;
         this.cantidad_producto = cantidad_producto;
         this.cod_marca = cod_marca;
         this.cod_proveedor = cod_proveedor;
@@ -76,22 +70,6 @@ public class Producto {
 
     public void setUnd_medida(String und_medida) {
         this.und_medida = und_medida;
-    }
-
-    public Date getFecha_recepcion() {
-        return fecha_recepcion;
-    }
-
-    public void setFecha_recepcion(Date fecha_recepcion) {
-        this.fecha_recepcion = fecha_recepcion;
-    }
-
-    public Date getFecha_salida() {
-        return fecha_salida;
-    }
-
-    public void setFecha_salida(Date fecha_salida) {
-        this.fecha_salida = fecha_salida;
     }
 
     public Integer getCantidad_producto() {

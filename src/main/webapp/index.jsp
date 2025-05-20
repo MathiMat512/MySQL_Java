@@ -104,10 +104,6 @@
                                                 <input type="hidden" name="accion" value="crear">
                                                 <input type="text" class="form-control mb-3" name="descripcion_producto" placeholder="Nombre" required>
                                                 <input type="text" class="form-control mb-3" name="und_medida" placeholder="Unidad de medida">
-                                                <label>Fecha de recepción</label>
-                                                <input type="date" class="form-control mb-3" name="fecha_recepcion">
-                                                <label>Fecha de salida</label>
-                                                <input type="date" class="form-control mb-3" name="fecha_salida">
                                                 <input type="number" class="form-control mb-3" name="cantidad_producto" placeholder="Cantidad">
                                                 <label>Marca</label>
                                                 <div class="dropdown mb-3 w-100">
@@ -308,10 +304,6 @@
                                                                     <input class="form-control mb-2" name="descripcion_producto" value="<%= producto.getDescripcion_producto()%>">
                                                                     <h6>Unidad de Medida</h6>
                                                                     <input class="form-control mb-2" name="und_medida" value="<%= producto.getUnd_medida()%>">
-                                                                    <h6>Fecha Recepción</h6>
-                                                                    <input type="date" class="form-control mb-2" name="fecha_recepcion" value="<%= producto.getFecha_recepcion()%>">
-                                                                    <h6>Fecha Salida</h6>
-                                                                    <input type="date" class="form-control mb-2" name="fecha_salida" value="<%= producto.getFecha_salida()%>">
                                                                     <h6>Cantidad</h6>
                                                                     <input class="form-control mb-2" name="cantidad_producto" value="<%= producto.getCantidad_producto()%>">
                                                                     <label>Marca de producto</label>

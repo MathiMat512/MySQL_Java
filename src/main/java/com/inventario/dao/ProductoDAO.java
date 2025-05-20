@@ -18,8 +18,6 @@ public class ProductoDAO implements IProductoDAO {
                 + "	a.id_producto,\n"
                 + "    a.descripcion_producto,\n"
                 + "    a.und_medida,\n"
-                + "    a.fecha_recepcion,\n"
-                + "    a.fecha_salida,\n"
                 + "    a.cantidad_producto,\n"
                 + "    a.cod_marca,\n"
                 + "    b.descripcion_marca,\n"
@@ -56,8 +54,6 @@ public class ProductoDAO implements IProductoDAO {
                             rs.getInt("id_producto"),
                             rs.getString("descripcion_producto"),
                             rs.getString("und_medida"),
-                            rs.getDate("fecha_recepcion"),
-                            rs.getDate("fecha_salida"),
                             rs.getInt("cantidad_producto"),
                             rs.getInt("cod_marca"),
                             rs.getString("descripcion_marca"),
@@ -161,21 +157,19 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public void guardarProducto(Producto producto) {
-        String consulta = "INSERT INTO tb_productos (descripcion_producto, und_medida, fecha_recepcion, fecha_salida, "
+        String consulta = "INSERT INTO tb_productos (descripcion_producto, und_medida, "
                 + "cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria, estado_producto) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement st = conexion.prepareStatement(consulta)) {
 
             st.setString(1, producto.getDescripcion_producto());
             st.setString(2, producto.getUnd_medida());
-            st.setDate(3, producto.getFecha_recepcion());
-            st.setDate(4, producto.getFecha_salida());
-            st.setInt(5, producto.getCantidad_producto());
-            st.setInt(6, producto.getCod_marca());
-            st.setInt(7, producto.getCod_proveedor());
-            st.setInt(8, producto.getCod_area());
-            st.setInt(9, producto.getId_categoria());
+            st.setInt(3, producto.getCantidad_producto());
+            st.setInt(4, producto.getCod_marca());
+            st.setInt(5, producto.getCod_proveedor());
+            st.setInt(6, producto.getCod_area());
+            st.setInt(7, producto.getId_categoria());
 
             int filasInsertadas = st.executeUpdate();
             if (filasInsertadas > 0) {
@@ -194,8 +188,6 @@ public class ProductoDAO implements IProductoDAO {
         String consulta = "UPDATE tb_productos SET \n"
                 + "descripcion_producto = ?, \n"
                 + "und_medida = ?, \n"
-                + "fecha_recepcion = ?, \n"
-                + "fecha_salida = ?, \n"
                 + "cantidad_producto = ?, \n"
                 + "cod_marca = ?, \n"
                 + "cod_proveedor = ?, \n"
@@ -207,14 +199,12 @@ public class ProductoDAO implements IProductoDAO {
 
             ps.setString(1, producto.getDescripcion_producto());
             ps.setString(2, producto.getUnd_medida());
-            ps.setDate(3, producto.getFecha_recepcion());
-            ps.setDate(4, producto.getFecha_salida());
-            ps.setInt(5, producto.getCantidad_producto());
-            ps.setInt(6, producto.getCod_marca());
-            ps.setInt(7, producto.getCod_proveedor());
-            ps.setInt(8, producto.getCod_area());
-            ps.setInt(9, producto.getId_categoria());
-            ps.setInt(10, producto.getId_producto());
+            ps.setInt(3, producto.getCantidad_producto());
+            ps.setInt(4, producto.getCod_marca());
+            ps.setInt(5, producto.getCod_proveedor());
+            ps.setInt(6, producto.getCod_area());
+            ps.setInt(7, producto.getId_categoria());
+            ps.setInt(8, producto.getId_producto());
 
             int filasAfectadas = ps.executeUpdate();
 
@@ -224,7 +214,7 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void eliminarProducto(Producto producto) /*throws SQLException */{
+    public void eliminarProducto(Producto producto){
         String consulta = "UPDATE tb_productos SET estado_producto=0 WHERE id_producto=?";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
@@ -242,6 +232,5 @@ public class ProductoDAO implements IProductoDAO {
                 Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
     }
 }

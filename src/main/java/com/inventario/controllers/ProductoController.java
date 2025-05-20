@@ -84,15 +84,13 @@ public class ProductoController extends HttpServlet {
         String idProducto = request.getParameter("id_producto");
         String descripcion_producto = request.getParameter("descripcion_producto");
         String und_medida = request.getParameter("und_medida");
-        Date fecha_recepcion = parseDateOrDefault(request.getParameter("fecha_recepcion"), null);
-        Date fecha_salida = parseDateOrDefault(request.getParameter("fecha_salida"), null);
         Integer cantidad_producto = parseIntegerOrDefault(request.getParameter("cantidad_producto"), 0);
         Integer cod_marca = parseIntegerOrDefault(request.getParameter("cod_marca"), null); // Puedes usar null si no es obligatorio
         Integer cod_proveedor = parseIntegerOrDefault(request.getParameter("cod_proveedor"), null); // Igualmente, puedes usar null si no es obligatorio
         Integer cod_area = parseIntegerOrDefault(request.getParameter("cod_area"), null);
         Integer id_categoria = parseIntegerOrDefault(request.getParameter("id_categoria"), null);
 
-        Producto producto = new Producto(descripcion_producto, und_medida, fecha_recepcion, fecha_salida,
+        Producto producto = new Producto(descripcion_producto, und_medida,
                 cantidad_producto, cod_marca, cod_proveedor, cod_area, id_categoria);
 
         switch (accion) {
