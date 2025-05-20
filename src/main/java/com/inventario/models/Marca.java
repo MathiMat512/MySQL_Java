@@ -1,8 +1,8 @@
 package com.inventario.models;
 
 public class Marca {
-    Integer id_marca;
-    String descripcion_marca;
+    private Integer id_marca;
+    private String descripcion_marca;
     
     public Marca(Integer id_marca, String descripcion_marca){
         this.id_marca = id_marca;

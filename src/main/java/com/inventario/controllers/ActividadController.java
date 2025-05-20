@@ -21,10 +21,18 @@ public class ActividadController extends HttpServlet{
         actividadDAO = new ActividadDAO();
     }
     
-    @Override
+        @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        List<Actividad> listarActividades = actividadDAO.listarActividades();
+            throws ServletException, IOException {
+        // Obtener el parámetro de límite (default 10 si no se especifica)
+        int limite = 10;
+        try {
+            limite = Integer.parseInt(request.getParameter("limite"));
+        } catch (NumberFormatException e) {
+            // Usar valor por defecto si hay error
+        }
+        
+        List<Actividad> listarActividades = actividadDAO.listarActividades(limite);
         request.setAttribute("actividades", listarActividades);
         
         request.getRequestDispatcher("actividades.jsp").forward(request, response);

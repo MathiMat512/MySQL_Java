@@ -10,6 +10,8 @@ select * from tb_proveedor;
 select * from tb_area;
 select * from tb_categoria;
 
+SELECT * FROM tb_actividades LIMIT 15;
+
 select * from tb_proveedor where estado_proveedor = 1;
 
 UPDATE tb_categoria SET estado_categoria = 0 where id_categoria = 5;

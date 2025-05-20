@@ -1,8 +1,8 @@
 package com.inventario.models;
 
 public class Rol {
-    Integer id_rol;
-    String descripcion_rol;
+    private Integer id_rol;
+    private String descripcion_rol;
     
     public Rol(Integer id_rol, String descripcion_rol){
         this.id_rol = id_rol;

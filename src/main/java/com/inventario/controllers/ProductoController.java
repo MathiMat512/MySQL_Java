@@ -41,7 +41,17 @@ public class ProductoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Producto> listaProductos = productoDAO.listarProductos();
+        int limite = 10;
+        try {
+            String limiteParam = request.getParameter("limite");
+            if (limiteParam != null && !limiteParam.isEmpty()) {
+                limite = Integer.parseInt(limiteParam);
+            }
+        } catch (NumberFormatException e) {
+            // Mantener el valor por defecto si hay error en el parámetro
+        }
+        
+        List<Producto> listaProductos = productoDAO.listarProductos(limite);
         request.setAttribute("productos", listaProductos);
 
         int totalCantidad = productoDAO.totalCantidades();

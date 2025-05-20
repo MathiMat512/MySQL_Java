@@ -83,14 +83,25 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Historial de Actividades y últimos cambios hechos</h5>
+                            <div class="d-flex align-items-center gap-2"> <label class="mb-0">Mostrar</label>
+                                <select class="form-select form-select-sm w-auto" aria-label="Small select example"
+                                        id="selectLimite" onchange="cambiarLimite()">
+                                    <option selected value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                </select>
+                                <label class="mb-0">resultados</label>
+                            </div>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Buscar código...">
+                                <input type="text" id="buscarCodigo" class="form-control" 
+                                       placeholder="Buscar código..." onkeyup="filtrarBusquedaporCodigo()">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="tabla" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
@@ -126,12 +137,28 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Siguiente</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </main>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
         <script src="Javascript/script.js"></script>
-        <script src="Javascript/buscar.js"></script>
+        <script src="Javascript/buscarCodigo.js"></script>
+        <script src="Javascript/cambiarLimiteActividad.js"></script>
     </body>
 </html>

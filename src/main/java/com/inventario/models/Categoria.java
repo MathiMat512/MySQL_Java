@@ -1,8 +1,8 @@
 package com.inventario.models;
 
 public class Categoria {
-    Integer id_categoria;
-    String descripcion_categoria;
+    private Integer id_categoria;
+    private String descripcion_categoria;
     
     public Categoria(Integer id_categoria, String descripcion_categoria){
         this.id_categoria = id_categoria;

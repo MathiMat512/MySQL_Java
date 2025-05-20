@@ -1,8 +1,8 @@
 package com.inventario.models;
 
 public class Proveedor {
-    Integer id_proveedor;
-    String descripcion_proveedor;
+    private Integer id_proveedor;
+    private String descripcion_proveedor;
     
     public Proveedor(Integer id_proveedor, String descripcion_proveedor){
         this.id_proveedor = id_proveedor;

@@ -3,20 +3,20 @@ package com.inventario.models;
 import java.sql.Date;
 
 public class Producto {
-    Integer id_producto;
-    String descripcion_producto;
-    String und_medida;
-    Date fecha_recepcion;
-    Date fecha_salida;
-    Integer cantidad_producto;
-    Integer cod_marca;
-    String descripcion_marca;
-    Integer cod_proveedor;
-    String descripcion_proveedor;
-    Integer cod_area;
-    String descripcion_area;
-    Integer id_categoria;
-    String descripcion_categoria;
+    private Integer id_producto;
+    private String descripcion_producto;
+    private String und_medida;
+    private Date fecha_recepcion;
+    private Date fecha_salida;
+    private Integer cantidad_producto;
+    private Integer cod_marca;
+    private String descripcion_marca;
+    private Integer cod_proveedor;
+    private String descripcion_proveedor;
+    private Integer cod_area;
+    private String descripcion_area;
+    private Integer id_categoria;
+    private String descripcion_categoria;
 
     public Producto(Integer id_producto, String descripcion_producto, String und_medida, Date fecha_recepcion, Date fecha_salida,
             Integer cantidad_producto, Integer cod_marca, String descripcion_marca, Integer cod_proveedor,

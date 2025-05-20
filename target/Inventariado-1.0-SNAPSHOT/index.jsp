@@ -231,22 +231,32 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Listado de Productos</h5>
+
+                            <div class="d-flex align-items-center gap-2"> <label class="mb-0">Mostrar</label>
+                                <select class="form-select form-select-sm w-auto" aria-label="Small select example"
+                                        id="selectLimite" onchange="cambiarLimite()">
+                                    <option selected value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                </select>
+                                <label class="mb-0">resultados</label>
+                            </div>
+
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" id="buscar" class="form-control" 
+                                <input type="text" id="buscar" class="form-control"
                                        placeholder="Buscar producto..." onkeyup="filtrarBusqueda()">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="tabla" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Medida</th>
-                                            <th>F. recepción</th>
-                                            <th>F. salida</th>
                                             <th>Stock</th>
                                             <th>Marca</th>
                                             <th>Proveedor</th>
@@ -267,8 +277,6 @@
                                                 <strong><%= producto.getDescripcion_producto()%></strong>
                                             </td>
                                             <td><%= producto.getUnd_medida()%></td>
-                                            <td><%= producto.getFecha_recepcion()%></td>
-                                            <td><%= producto.getFecha_salida()%></td>
                                             <td><%= producto.getCantidad_producto()%></td>
                                             <td><%= producto.getDescripcion_marca()%></td>
                                             <td><%= producto.getDescripcion_proveedor()%></td>
@@ -467,5 +475,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
         <script src="Javascript/script.js"></script>
         <script src="Javascript/buscar.js"></script>
+        <script src="Javascript/cambiarLimiteProducto.js"></script>
     </body>
 </html>

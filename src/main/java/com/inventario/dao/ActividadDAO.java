@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActividadDAO {
-    
-    public List<Actividad> listarActividades() {
+
+    public List<Actividad> listarActividades(int limite) {
         List<Actividad> actividades = new ArrayList<>();
         String consulta = "select \n"
                 + "	a.id_actividad,\n"
@@ -25,19 +25,22 @@ public class ActividadDAO {
                 + "INNER JOIN\n"
                 + "	tb_usuarios b ON a.id_user = b.id_user\n"
                 + "INNER JOIN\n"
-                + "	tb_productos c ON a.id_producto = c.id_producto;";
-        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta); ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Actividad actividad = new Actividad(
-                        rs.getInt("id_actividad"),
-                        rs.getString("descripcion"),
-                        rs.getObject("fecha_mov", LocalDateTime.class),
-                        rs.getInt("id_user"),
-                        rs.getString("username"),
-                        rs.getInt("id_producto"),
-                        rs.getString("descripcion_producto")
-                );
-                actividades.add(actividad);
+                + "	tb_productos c ON a.id_producto = c.id_producto LIMIT ?;";
+        try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+            ps.setInt(1, limite);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Actividad actividad = new Actividad(
+                            rs.getInt("id_actividad"),
+                            rs.getString("descripcion"),
+                            rs.getObject("fecha_mov", LocalDateTime.class),
+                            rs.getInt("id_user"),
+                            rs.getString("username"),
+                            rs.getInt("id_producto"),
+                            rs.getString("descripcion_producto")
+                    );
+                    actividades.add(actividad);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,8 +1,8 @@
 package com.inventario.models;
 
 public class Area {
-    Integer id_area;
-    String descripcion_area;
+    private Integer id_area;
+    private String descripcion_area;
     
     public Area(Integer id_area, String descripcion_area){
         this.id_area = id_area;

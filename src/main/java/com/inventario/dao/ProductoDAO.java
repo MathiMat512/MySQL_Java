@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class ProductoDAO implements IProductoDAO {
 
     @Override
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProductos(int limite) {
         List<Producto> productos = new ArrayList<>();
         String consulta = "SELECT\n"
                 + "	a.id_producto,\n"
@@ -40,28 +40,36 @@ public class ProductoDAO implements IProductoDAO {
                 + "INNER JOIN \n"
                 + "	tb_categoria e ON a.id_categoria = e.id_categoria\n"
                 + "where estado_producto = 1 "
-                + "order by a.id_producto;";
+                + "order by a.id_producto LIMIT ?;";
 
-        try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement ps = conn.prepareStatement(consulta); ResultSet rs = ps.executeQuery(consulta)) {
-
-            while (rs.next()) {
-                Producto producto = new Producto(
-                        rs.getInt("id_producto"),
-                        rs.getString("descripcion_producto"),
-                        rs.getString("und_medida"),
-                        rs.getDate("fecha_recepcion"),
-                        rs.getDate("fecha_salida"),
-                        rs.getInt("cantidad_producto"),
-                        rs.getInt("cod_marca"),
-                        rs.getString("descripcion_marca"),
-                        rs.getInt("cod_proveedor"),
-                        rs.getString("descripcion_proveedor"),
-                        rs.getInt("cod_area"),
-                        rs.getString("descripcion_area"),
-                        rs.getInt("id_categoria"),
-                        rs.getString("descripcion_categoria")
-                );
-                productos.add(producto);
+        try (Connection conn = MySQLConnection.conectarMySQL();
+             PreparedStatement ps = conn.prepareStatement(consulta)) {
+            
+            // Solo agregamos el parámetro si el límite es mayor a 0
+            if (limite > 0) {
+                ps.setInt(1, limite);
+            }
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto producto = new Producto(
+                            rs.getInt("id_producto"),
+                            rs.getString("descripcion_producto"),
+                            rs.getString("und_medida"),
+                            rs.getDate("fecha_recepcion"),
+                            rs.getDate("fecha_salida"),
+                            rs.getInt("cantidad_producto"),
+                            rs.getInt("cod_marca"),
+                            rs.getString("descripcion_marca"),
+                            rs.getInt("cod_proveedor"),
+                            rs.getString("descripcion_proveedor"),
+                            rs.getInt("cod_area"),
+                            rs.getString("descripcion_area"),
+                            rs.getInt("id_categoria"),
+                            rs.getString("descripcion_categoria")
+                    );
+                    productos.add(producto);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
