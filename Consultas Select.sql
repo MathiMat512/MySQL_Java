@@ -10,6 +10,9 @@ select * from tb_proveedor;
 select * from tb_area;
 select * from tb_categoria;
 
+
+select username, password from tb_usuarios;
+
 SELECT * FROM tb_actividades LIMIT 15;
 
 select * from tb_proveedor where estado_proveedor = 1;

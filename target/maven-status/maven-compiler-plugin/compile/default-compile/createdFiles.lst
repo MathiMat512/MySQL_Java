@@ -16,9 +16,11 @@ com\inventario\models\Area.class
 com\inventario\dao\MySQLConnection.class
 com\inventario\controllers\CategoriaController.class
 com\inventario\controllers\DashboardController.class
+com\inventario\controllers\LoginController.class
 com\inventario\controllers\ProveedorController.class
 com\inventario\models\Categoria.class
 com\inventario\models\Marca.class
+com\inventario\dao\LoginDAO.class
 com\mycompany\inventariado\resources\JakartaEE11Resource.class
 com\inventario\models\Transaccion.class
 com\inventario\models\Proveedor.class

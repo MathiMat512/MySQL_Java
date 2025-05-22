@@ -2,6 +2,7 @@ C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\cont
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\AreaController.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\CategoriaController.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\DashboardController.java
+C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\LoginController.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\MarcaController.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\ProductoController.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\controllers\ProveedorController.java
@@ -11,6 +12,7 @@ C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\AreaDAO.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\CategoriaDAO.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\IProductoDAO.java
+C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\LoginDAO.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\MarcaDAO.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\MySQLConnection.java
 C:\Users\Usuario\Desktop\Inventario\MySQL_Java\src\main\java\com\inventario\dao\ProductoDAO.java

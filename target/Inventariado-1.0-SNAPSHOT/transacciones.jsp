@@ -65,6 +65,11 @@
                                     <i class="bi bi-person-circle"></i> Usuarios
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Inventariado-1.0-SNAPSHOT/login">
+                                    <i class="bi bi-person-fill-lock"></i> Cerrar sesión
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
