@@ -1,11 +1,11 @@
 function filtrarBusquedaporCodigo() {
     const input = document.getElementById('buscarCodigo');
     const filter = input.value.trim().toUpperCase();
-    const table = document.getElementById('tablaActividades'); // Selección correcta
+    const table = document.getElementById('tabla'); 
     const tr = table.getElementsByTagName('tr');
 
     for (let i = 1; i < tr.length; i++) {
-        const td = tr[i].getElementsByTagName('td')[0]; // Columna "Código"
+        const td = tr[i].getElementsByTagName('td')[0]; 
         if (td) {
             const txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {

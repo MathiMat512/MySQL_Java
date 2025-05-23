@@ -3,6 +3,37 @@ select * from tb_usuarios;
 select * from tb_roles;
 select * from tb_transacciones;
 
+select count(id_actividad) as totalActividades from tb_actividades;
+SELECT 
+    a.id_producto, 
+    a.descripcion_producto, 
+    a.und_medida, 
+    a.cantidad_producto,
+    a.cod_marca, 
+    b.descripcion_marca, 
+    a.cod_proveedor, 
+    c.descripcion_proveedor,
+    a.cod_area, 
+    d.descripcion_area, 
+    a.id_categoria, 
+    e.descripcion_categoria
+FROM 
+    tb_productos a
+INNER JOIN 
+    tb_marca b ON a.cod_marca = b.id_marca
+INNER JOIN 
+    tb_proveedor c ON a.cod_proveedor = c.id_proveedor
+INNER JOIN 
+    tb_area d ON a.cod_area = d.id_area
+INNER JOIN 
+    tb_categoria e ON a.id_categoria = e.id_categoria
+WHERE 
+    a.estado_producto = 1 
+    AND a.descripcion_producto LIKE 'mouse';
+    
+select * from tb_categoria where estado_categoria = 1 and descripcion_categoria LIKE 'Tintas';
+
+
 
 SELECT * FROM tb_productos;
 select * from tb_marca;

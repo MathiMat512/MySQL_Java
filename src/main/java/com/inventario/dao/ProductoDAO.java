@@ -40,14 +40,13 @@ public class ProductoDAO implements IProductoDAO {
                 + "where estado_producto = 1 "
                 + "order by a.id_producto LIMIT ?;";
 
-        try (Connection conn = MySQLConnection.conectarMySQL();
-             PreparedStatement ps = conn.prepareStatement(consulta)) {
-            
+        try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement ps = conn.prepareStatement(consulta)) {
+
             // Solo agregamos el parámetro si el límite es mayor a 0
             if (limite > 0) {
                 ps.setInt(1, limite);
             }
-            
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Producto producto = new Producto(
@@ -81,7 +80,7 @@ public class ProductoDAO implements IProductoDAO {
         try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement stmt = conn.prepareStatement(consulta); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Proveedor proveedor = new Proveedor(
-                                                rs.getString("descripcion_proveedor")
+                        rs.getString("descripcion_proveedor")
                 );
                 proveedores.add(proveedor);
             }
@@ -150,9 +149,44 @@ public class ProductoDAO implements IProductoDAO {
         return totalProductos;
     }
 
-    @Override
-    public void buscarProductoporId() {
+    public List<Producto> buscarPorDescripcion(String descripcion) {
+        List<Producto> productos = new ArrayList<>();
+        String consulta = "SELECT a.id_producto, a.descripcion_producto, a.und_medida, a.cantidad_producto, "
+                + "a.cod_marca, b.descripcion_marca, a.cod_proveedor, c.descripcion_proveedor, "
+                + "a.cod_area, d.descripcion_area, a.id_categoria, e.descripcion_categoria "
+                + "FROM tb_productos a "
+                + "INNER JOIN tb_marca b ON a.cod_marca = b.id_marca "
+                + "INNER JOIN tb_proveedor c ON a.cod_proveedor = c.id_proveedor "
+                + "INNER JOIN tb_area d ON a.cod_area = d.id_area "
+                + "INNER JOIN tb_categoria e ON a.id_categoria = e.id_categoria "
+                + "WHERE a.estado_producto = 1 AND a.descripcion_producto LIKE ?";
 
+        try (Connection conn = MySQLConnection.conectarMySQL(); PreparedStatement ps = conn.prepareStatement(consulta)) {
+
+            ps.setString(1, "%" + descripcion + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto producto = new Producto(
+                            rs.getInt("id_producto"),
+                            rs.getString("descripcion_producto"),
+                            rs.getString("und_medida"),
+                            rs.getInt("cantidad_producto"),
+                            rs.getInt("cod_marca"),
+                            rs.getString("descripcion_marca"),
+                            rs.getInt("cod_proveedor"),
+                            rs.getString("descripcion_proveedor"),
+                            rs.getInt("cod_area"),
+                            rs.getString("descripcion_area"),
+                            rs.getInt("id_categoria"),
+                            rs.getString("descripcion_categoria")
+                    );
+                    productos.add(producto);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productos;
     }
 
     @Override
@@ -214,7 +248,7 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void eliminarProducto(Producto producto){
+    public void eliminarProducto(Producto producto) {
         String consulta = "UPDATE tb_productos SET estado_producto=0 WHERE id_producto=?";
 
         try (Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement ps = conexion.prepareStatement(consulta)) {

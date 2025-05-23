@@ -10,7 +10,7 @@ public interface IProductoDAO {
     List<Categoria> listarCategorias();
     public int totalCantidades();
     public int productosRegistrados();
-    public void buscarProductoporId();
+    List buscarPorDescripcion(String descripcion);
     public void guardarProducto(Producto producto);
     public void actualizarProducto(Producto producto);
     public void eliminarProducto(Producto producto);

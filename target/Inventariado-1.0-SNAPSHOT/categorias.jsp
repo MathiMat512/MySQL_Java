@@ -116,13 +116,13 @@
                             <h5 class="mb-0">Listado de Categorias</h5>
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" id="buscar" 
-                                placeholder="Buscar categoria..." onkeyup="filtrarBusqueda()">
+                                <input type="text" class="form-control" id="buscarDescripcion" 
+                                placeholder="Buscar categoria...">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="tabla" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID categoria</th>

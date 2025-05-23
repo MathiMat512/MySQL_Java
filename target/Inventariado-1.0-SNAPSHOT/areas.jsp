@@ -117,12 +117,12 @@
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
                                 <input type="text" class="form-control" id="buscar" 
-                                placeholder="Buscar área..." onkeyup="filtrarBusqueda()">
+                                placeholder="Buscar área...">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="tabla" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID área</th>

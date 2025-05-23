@@ -1,3 +1,4 @@
+com\inventario\controllers\ProductoController$1.class
 com\inventario\models\Producto.class
 com\inventario\dao\TransaccionDAO.class
 com\inventario\controllers\AreaController.class

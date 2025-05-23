@@ -23,6 +23,19 @@ public class CategoriaController extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
+        String accion = request.getParameter("accion");
+        
+        if(accion !=null){
+            switch (accion) {
+                case "buscar":{
+                    String termino = request.getParameter("termino");
+                    List<Categoria> resultados = categoriaDAO.buscarCategoria(termino);
+                    request.setAttribute("categorias", resultados);
+                    request.getRequestDispatcher("partials/tabla-categorias.jsp").forward(request, response);
+                    return;
+                }
+            }
+        }
         
         List<Categoria> listarCategorias = categoriaDAO.listarCategorias();
         request.setAttribute("categorias", listarCategorias);

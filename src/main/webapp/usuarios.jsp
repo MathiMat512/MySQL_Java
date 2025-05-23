@@ -165,12 +165,12 @@
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
                                 <input type="text" class="form-control" id="buscar" 
-                                placeholder="Buscar usuario..." onkeyup="filtrarBusqueda()">
+                                placeholder="Buscar usuario...">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="tabla" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID usuario</th>

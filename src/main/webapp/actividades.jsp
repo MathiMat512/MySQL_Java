@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.inventario.models.Actividad"%>
 <%@page import="java.util.List"%>
 <%@page import="com.inventario.models.Categoria"%>
@@ -145,14 +146,21 @@
                         <!-- Pagination -->
                         <nav aria-label="Page navigation" class="mt-4">
                             <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                <li class="page-item ${paginaActual == 1 ? 'disabled' : ''}">
+                                    <a class="page-link" href="actividades?limite=${limiteActual}&pagina=${paginaActual - 1}" 
+                                       aria-disabled="${paginaActual == 1}">Anterior</a>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Siguiente</a>
+
+                                <%-- Mostrar números de página --%>
+                                <c:forEach begin="1" end="${totalPaginas}" var="i">
+                                    <li class="page-item ${paginaActual == i ? 'active' : ''}">
+                                        <a class="page-link" href="actividades?limite=${limiteActual}&pagina=${i}">${i}</a>
+                                    </li>
+                                </c:forEach>
+
+                                <li class="page-item ${paginaActual == totalPaginas ? 'disabled' : ''}">
+                                    <a class="page-link" href="actividades?limite=${limiteActual}&pagina=${paginaActual + 1}" 
+                                       aria-disabled="${paginaActual == totalPaginas}">Siguiente</a>
                                 </li>
                             </ul>
                         </nav>
@@ -160,6 +168,18 @@
                 </main>
             </div>
         </div>
+        <script>
+            function cambiarLimite() {
+                const limite = document.getElementById('selectLimite').value;
+                window.location.href = 'actividades?limite=' + limite + '&pagina=1';
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const limiteActual = urlParams.get('limite') || 10;
+                document.getElementById('selectLimite').value = limiteActual;
+            });
+        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
         <script src="Javascript/script.js"></script>

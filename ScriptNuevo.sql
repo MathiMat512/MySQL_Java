@@ -26,6 +26,7 @@ INNER JOIN
 where estado_producto=1
 order by a.id_producto;
 
+select * from tb_productos where id_producto=2;
 
 select 
 	a.id_actividad,

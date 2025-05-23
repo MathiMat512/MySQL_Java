@@ -18,6 +18,12 @@ import com.inventario.models.Area;
 import com.inventario.models.Categoria;
 import com.inventario.models.Marca;
 import com.inventario.models.Proveedor;
+import jxl.*;
+import jxl.write.*;
+import jxl.write.Number;
+import jxl.write.WritableWorkbook;
+import jxl.write.WritableSheet;
+import jxl.write.Label;
 
 @WebServlet("/productos")
 public class ProductoController extends HttpServlet {
@@ -41,7 +47,26 @@ public class ProductoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String accion = request.getParameter("accion");
+
+        if (accion != null) {
+            switch (accion) {
+                case "exportarExcel": {
+                    exportarExcel(request, response);
+                    return;
+                }
+                case "buscar": {
+                    String termino = request.getParameter("termino");
+                    List<Producto> resultados = productoDAO.buscarPorDescripcion(termino);
+                    request.setAttribute("productos", resultados);
+                    request.getRequestDispatcher("partials/tabla-productos.jsp").forward(request, response);
+                    return;
+                }
+            }
+        }
+
         int limite = 10;
+
         try {
             String limiteParam = request.getParameter("limite");
             if (limiteParam != null && !limiteParam.isEmpty()) {
@@ -50,7 +75,7 @@ public class ProductoController extends HttpServlet {
         } catch (NumberFormatException e) {
             // Mantener el valor por defecto si hay error en el parámetro
         }
-        
+
         List<Producto> listaProductos = productoDAO.listarProductos(limite);
         request.setAttribute("productos", listaProductos);
 
@@ -112,6 +137,55 @@ public class ProductoController extends HttpServlet {
         response.sendRedirect("productos");
     }
 
+    protected void exportarExcel(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=productos.xls");
+
+        try {
+            WritableWorkbook workbook = Workbook.createWorkbook(response.getOutputStream());
+
+            WritableSheet sheet = workbook.createSheet("Productos", 0);
+
+            WritableFont headerFont = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
+            WritableCellFormat headerFormat = new WritableCellFormat(headerFont);
+            headerFormat.setBackground(Colour.GRAY_25);
+
+            String[] headers = {"ID", "Nombre", "Medida", "Stock", "Marca", "Proveedor", "Área", "Categoría"};
+            for (int i = 0; i < headers.length; i++) {
+                Label label = new Label(i, 0, headers[i], headerFormat) {
+                };
+                sheet.addCell(label);
+            }
+
+            List<Producto> productos = productoDAO.listarProductos(Integer.MAX_VALUE);
+
+            int rowNum = 1;
+            for (Producto p : productos) {
+                sheet.addCell(new Number(0, rowNum, p.getId_producto()));
+                sheet.addCell(new Label(1, rowNum, p.getDescripcion_producto()));
+                sheet.addCell(new Label(2, rowNum, p.getUnd_medida()));
+                sheet.addCell(new Number(3, rowNum, p.getCantidad_producto()));
+                sheet.addCell(new Label(4, rowNum, p.getDescripcion_marca()));
+                sheet.addCell(new Label(5, rowNum, p.getDescripcion_proveedor()));
+                sheet.addCell(new Label(6, rowNum, p.getDescripcion_area()));
+                sheet.addCell(new Label(7, rowNum, p.getDescripcion_categoria()));
+                rowNum++;
+            }
+
+            for (int i = 0; i < headers.length; i++) {
+                sheet.setColumnView(i, 20); // Ancho de columna en caracteres
+            }
+
+            workbook.write();
+            workbook.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private Date parseDateOrDefault(String value, Date defaultValue) {
         try {
             return (value != null && !value.trim().isEmpty()) ? Date.valueOf(value) : defaultValue;
@@ -125,10 +199,9 @@ public class ProductoController extends HttpServlet {
             try {
                 return Integer.valueOf(param);
             } catch (NumberFormatException e) {
-                // Puedes agregar un log aquí si es necesario
-                return defaultValue;  // Devuelve el valor predeterminado si no se puede convertir
+                return defaultValue;
             }
         }
-        return defaultValue;  // Devuelve el valor predeterminado si el parámetro es null o vacío
+        return defaultValue;
     }
 }

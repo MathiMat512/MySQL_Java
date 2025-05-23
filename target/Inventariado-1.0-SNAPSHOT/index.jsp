@@ -88,10 +88,18 @@
                                 <button type="button" class="btn btn-sm btn-outline-secondary">
                                     <i class="bi bi-printer"></i> Imprimir
                                 </button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
+
+                                <div class="btn-group" role="group">
+                                    <button id="btnExportar" type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Exportar
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnExportar">
+                                        <li><a class="dropdown-item" href="productos?accion=exportarExcel">A Excel</a></li>
+                                        <li><a class="dropdown-item" href="#">A PDF</a></li>
+                                    </ul>
+                                </div>
                             </div>
+
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-circle"></i> Nuevo Producto
                             </button>
@@ -246,13 +254,13 @@
 
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input type="text" id="buscar" class="form-control"
-                                       placeholder="Buscar producto..." onkeyup="filtrarBusqueda()">
+                                <input type="text" id="buscarDescripcion" class="form-control"
+                                       placeholder="Buscar producto...">
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="tabla" class="table table-hover">
+                                <table id="tablaProductos" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -266,7 +274,7 @@
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tablaProductos">
                                         <%
                                             List<Producto> productos = (List<Producto>) request.getAttribute("productos");
                                             if (productos != null) {
@@ -470,8 +478,8 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="Javascript/script.js"></script>
-        <script src="Javascript/buscar.js"></script>
+        <script src="${pageContext.request.contextPath}/Javascript/script.js"></script>
+        <script src="${pageContext.request.contextPath}/Javascript/buscar.js"></script>
         <script src="Javascript/cambiarLimiteProducto.js"></script>
     </body>
 </html>

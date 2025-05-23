@@ -72,4 +72,26 @@ public class CategoriaDAO {
             e.printStackTrace();
         }
     }
+    
+    public List<Categoria> buscarCategoria(String descripcion){
+        List<Categoria> categorias = new ArrayList<>();
+        String consulta = "select * from tb_categoria where estado_categoria = 1 and descripcion_categoria LIKE ?;";
+        
+        try(Connection conexion = MySQLConnection.conectarMySQL(); PreparedStatement pstmt = conexion.prepareStatement(consulta)) {
+            pstmt.setString(1, "%" + descripcion + "%");
+            try(ResultSet rs = pstmt.executeQuery()) {
+                while(rs.next()){
+                    Categoria categoria = new Categoria(
+                            rs.getInt("id_categoria"),
+                            rs.getString("descripcion_categoria")
+                    );
+                    categorias.add(categoria);
+                }               
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        
+        return categorias;
+    }
 }

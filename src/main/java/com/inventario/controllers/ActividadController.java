@@ -11,30 +11,45 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/actividades")
-public class ActividadController extends HttpServlet{
-    
+public class ActividadController extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
     private ActividadDAO actividadDAO;
-    
+
     @Override
     public void init() throws ServletException {
         actividadDAO = new ActividadDAO();
     }
-    
-        @Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener el parámetro de límite (default 10 si no se especifica)
-        int limite = 10;
+
+        int limite = 10; // Valor por defecto
+        int pagina = 1;  // Página por defecto
+
         try {
             limite = Integer.parseInt(request.getParameter("limite"));
         } catch (NumberFormatException e) {
-            // Usar valor por defecto si hay error
         }
-        
-        List<Actividad> listarActividades = actividadDAO.listarActividades(limite);
+
+        try {
+            pagina = Integer.parseInt(request.getParameter("pagina"));
+        } catch (NumberFormatException e) {
+        }
+
+        int totalActividades = actividadDAO.totalActividades();
+        int totalPaginas = (int) Math.ceil((double) totalActividades / limite);
+
+        List<Actividad> listarActividades = actividadDAO.listarActividadesPaginadas(limite, pagina);
+
         request.setAttribute("actividades", listarActividades);
-        
+        request.setAttribute("totalActividades", totalActividades);
+        request.setAttribute("totalPaginas", totalPaginas);
+        request.setAttribute("paginaActual", pagina);
+        request.setAttribute("limiteActual", limite);
+
         request.getRequestDispatcher("actividades.jsp").forward(request, response);
     }
+
 }
